@@ -1,0 +1,66 @@
+/* Reset some default margins/paddings for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #335;
+  padding: 20px;
+}
+
+/* Header styles */
+header {
+  background-color: #4CAF50;
+  color: blue;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4.5em;
+}
+
+/* Section styles */
+section {
+  margin: 20px 0;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+strong {
+  color: #e74c3c;
+}
+
+em {
+  color: #3498db;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1.1em;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1d5d8a;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: 20px;
+  color: #777;
+}
