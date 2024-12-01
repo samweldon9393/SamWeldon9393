@@ -9,6 +9,9 @@ module.exports = {
             myBlue: '#06448d',
             coolOrange: '#f97559',
         },
+        fontFamily:{
+            body: ['Abril Fatface']
+        }
     },
   },
   plugins: [],
