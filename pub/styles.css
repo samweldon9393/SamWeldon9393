@@ -562,6 +562,10 @@ video {
   height: 15rem;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .w-60 {
   width: 15rem;
 }
@@ -574,14 +578,12 @@ video {
   justify-content: space-evenly;
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+.bg-cover {
+  background-size: cover;
 }
 
-.from-green-700 {
-  --tw-gradient-from: #15803d var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(21 128 61 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+.bg-no-repeat {
+  background-repeat: no-repeat;
 }
 
 .py-6 {
