@@ -1,0 +1,32 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger deploy on push to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install  # Adjust if you have specific dependencies
+
+      - name: Build the site
+        run: npm run build  # Adjust if you need to build the site (e.g., for React or other frameworks)
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.1.1
+        with:
+          branch: gh-pages  # The branch to deploy to
+          folder: /pub  # Your subdirectory (e.g., "docs" or "public")
+
