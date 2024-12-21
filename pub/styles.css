@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
-/* ./src/tailwind.css */
-
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -110,7 +108,9 @@
   --tw-contain-style:  ;
 }
 
-/* ! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com */
+/*
+! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com
+*/
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -556,6 +556,10 @@ video {
   display: none;
 }
 
+.col-span-8{
+  grid-column: span 8 / span 8;
+}
+
 .ml-2{
   margin-left: 0.5rem;
 }
@@ -564,8 +568,8 @@ video {
   margin-right: 0.5rem;
 }
 
-.flex{
-  display: flex;
+.grid{
+  display: grid;
 }
 
 .h-60{
@@ -580,12 +584,8 @@ video {
   width: 15rem;
 }
 
-.items-end{
-  align-items: flex-end;
-}
-
-.justify-end{
-  justify-content: flex-end;
+.grid-cols-12{
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 .bg-cover{
@@ -596,8 +596,14 @@ video {
   background-repeat: no-repeat;
 }
 
-.text-center{
-  text-align: center;
+.px-10{
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.py-8{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .font-body{
@@ -608,21 +614,30 @@ video {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.text-6xl{
-  font-size: 3.75rem;
-  line-height: 1;
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
-.text-xl{
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-.text-slate-800{
+.text-slate-600{
   --tw-text-opacity: 1;
-  color: rgb(30 41 59 / var(--tw-text-opacity, 1));
+  color: rgb(71 85 105 / var(--tw-text-opacity, 1));
 }
 
 .opacity-75{
   opacity: 0.75;
+}
+
+.Card{
+  min-height: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-family: Abril Fatface;
+}
+
+.Link{
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 2.5rem;
+  padding-inline-end: 3rem;
 }
