@@ -11,23 +11,28 @@
   </head>
 
   <body class="bg-slate-100 text-slate-600 h-screen ">
-        <!--style="background-image: url(pub/images/BlueBG.png)")-->
+    <!--style="background-image: url(pub/images/BlueBG.png)")-->
 
-
-    <div class="grid grid-cols-12 bg-slate-50 shadow"> 
-      <div class="text-xl font-Oran col-span-8 px-12 p-4 ">
-        <img class="max-h-16 max-w-24" src="pub/images/Logo3.png" alt="Sam Weldon" />
-      </div>
-      <div class="Card"> <h2 class="Link">About</h2> </div>
-      <div class="Card"> <h2 class="Link">Projects</h2> </div>
-      <div class="Card"> <h2 class="Link">Photos</h2> </div>
-      <div class="Card"> <h2 class="Link">Contact</h2> </div>
-    </div>
+    <header role="banner" class="relative flex flex-col items-center justify-between bg-slate-50
+                  px-6 py-6 sm:flex-row md:px-8 sm:py-6 lg:px-10 2xl:py-6 2xl:px12"> 
+      <img class="flex-shrink-0 items-center h-12 w-20 min-h-12 min-w-20 opacity-80 hover:opacity-50
+                   transition"
+           src="pub/images/Logo3.png" alt="Sam Weldon" />
+      <nav class="pt-3 sm:ml-auto sm:pt-0">
+        <ul class="flex space-x-6 sm:space-x-12 lg:space-x-16 xl:space-x-16 2xl:space-x-20
+          font-SCPro ">
+          <li class="Card"> <h2 class="Link">About</h2> </li>
+          <li class="Card"> <h2 class="Link">Projects</h2> </li>
+          <li class="Card"> <h2 class="Link">Photos</h2> </li>
+          <li class="Card no-shadow"> <h2 class="Link">Contact</h2> </li>
+        </ul>
+      </nav>
+    </header>
 
     <div class="grid grid-cols-2 border py-32 px-96 space-x-1">
       <div class="max-h-80 max-w-80">
-        <img src="pub/images/Headshot.jpg" alt="Picture of Me" />
-      </div>
+        <img class="rounded border-2" src="pub/images/Headshot.jpg" alt="Picture of Me" />
+          </div>
       <div class="pt-10">
         <h1 class="text-2xl font-SCPro">Hi, I'm Sam</h1>
         <p>Use the absolute utility to position an element outside of the normal flow of the document, causing neighboring elements to act as if the element doesn’t exist.
