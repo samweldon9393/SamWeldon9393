@@ -10,7 +10,10 @@ module.exports = {
             coolOrange: '#f97559',
         },
         fontFamily:{
-            body: ['Abril Fatface']
+            Outfit: ['Outfit'],
+            SCPro: ['Source Code Pro'],
+            Kanit: ['Kanit'],
+            Oran: ['Oranienbaum']
         }
     },
   },
