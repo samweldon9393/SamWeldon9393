@@ -6,8 +6,11 @@ module.exports = {
   theme: {
     extend: {
         colors: {
-            myBlue: '#06448d',
+            deepBlue: '#0f1021',
+            deeperBlue:'#060714',
             coolOrange: '#f97559',
+            myRed: '#ffe8e8',
+            deepRed: '#200000',
         },
         fontFamily:{
             Outfit: ['Outfit'],
