@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="text-white bg-deeperBlue font-Kanit" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="HTML, CSS">
+    <meta name="description" content="Hello!">  
+    <title>About</title>
+    <link rel="stylesheet" href="pub/styles.css">
+    <link rel="icon" href="pub/images/favicon4.png" type="image/png">
+  </head>
+  <body class="relative">
+   <header role="banner" class="relative flex flex-col items-center justify-between bg-opacity-50 
+                         px-4 pt-4 sm:flex-row md:px-8 sm:py-6 lg:px-10 2xl:py-2 2xl:px12"> 
+     <a href="./index.html"> 
+       <img class="flex-shrink-0 items-center h-24 w-24 min-h-20 min-w-20 hover:rotate-180 
+                    transition-transform duration-500 opacity-90 transition object-fill"
+            src="pub/images/SFWblue.png" alt="Sam Weldon" />
+     </a>
+      <nav class="sm:ml-auto sm:pt-0 text-blue-300 pb-10">
+        <ul class="flex space-x-6 sm:space-x-12 lg:space-x-16 xl:space-x-16 2xl:space-x-20
+          font-SCPro ">
+          <li class="Card">  <a class="clickedLink" href="./about.html">About</a> </li>
+          <li class="Card">  <a class="Link" href="/#projects">Projects</a> </li>
+          <li class="Card"> <a class="Link" href="https://google.com">Photos</a> </li>
+          <li class="Card"> <a class="Link" href="/#contact">Contact</a> </li>
+        </ul>
+      </nav>
+    </header> 
+
+    <div class="flex justify-center flex-wrap px-4 pt-20 mb-8 sm:px-6 lg:px-0 ">
+      <div class="max-h-80 max-w-80 px-4 mb-4">
+        <img class="rounded shadow min-w-72" src="pub/images/Headshot.jpg" alt="Picture of Me" />
+      </div>
+      <div class="min-w-72">
+        <h1 class="text-2xl font-Kanit">Hi, I'm Sam</h1>
+        <p class="font-SCPro text-sm max-w-72 ">
+        31 year old junior at Columbia University, studying History and Computer Science. I spent my most of my twenties working in sales before returing to school in search of personal growth and new challenges. In September, my cat
+        <span class="relative group"><span href="pub/images/Winnie.png" onclick="showModal()" class="underline cursor-pointer text-blue-500 hover:opacity-50">Winnie</span> 
+
+          <span class="absolute hidden group-hover:flex inset-0 bg-black bg-opacity-50 items-center justify-center">
+            <span class="p-1 bg-blue-100 rounded-lg shadow-2xl shadow-inner">
+              <img src="pub/images/Winnie.png" alt="My cat" class="rounded-md max-w-xs">
+            </span>
+          </span>
+        </span>
+        and I moved to NYC, where I am now working toward completing my BA and finding an exciting role in the tech industry!
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

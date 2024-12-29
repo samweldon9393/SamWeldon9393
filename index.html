@@ -20,47 +20,55 @@
       <img class="flex-shrink-0 items-center h-24 w-24 min-h-20 min-w-20 hover:rotate-180 
                    transition-transform duration-500 opacity-90 transition object-fill"
            src="pub/images/SFWblue.png" alt="Sam Weldon" />
-      <nav class="sm:ml-auto sm:pt-0 text-blue-300 pb-10">
+      <nav class="sm:ml-auto sm:pt-0 text-blue-100 pb-10">
         <ul class="flex space-x-6 sm:space-x-12 lg:space-x-16 xl:space-x-16 2xl:space-x-20
-          font-SCPro ">
-          <li class="Card"> <h2 class="Link">About</h2> </li>
-          <li class="Card"> <h2 class="Link">Projects</h2> </li>
-          <li class="Card"> <h2 class="Link">Photos</h2> </li>
-          <li class="Card no-shadow"> <h2 class="Link">Contact</h2> </li>
+           ">
+          <li class="Card">  <a class="Link" href="./about.html">About</a> </li>
+          <li class="Card">  <a class="Link" href="/#projects">Projects</a> </li>
+          <li class="Card"> <a class="Link" href="https://google.com">Photos</a> </li>
+          <li class="Card"> <a class="Link" href="/#contact">Contact</a> </li>
         </ul>
       </nav>
     </header>
 
     <main id="main-content" class="mx-auto">
-      <article class="flex justify-center flex-wrap px-4 pt-20 mb-8 sm:px-6 lg:px-0 ">
-        <div class="max-h-80 max-w-80 px-4 mb-4">
-          <img class="rounded shadow min-w-72" src="pub/images/Headshot.jpg" alt="Picture of Me" />
-        </div>
-        <div class="min-w-72">
-          <h1 class="text-2xl font-Kanit">Hi, I'm Sam</h1>
-          <p class="font-SCPro text-sm max-w-72 ">
-          31 year old junior at Columbia University, studying History and Computer Science. I spent my most of my twenties working in sales before returing to school in search of personal growth and new challenges. In September, my cat
-          <span class="relative group"><span href="pub/images/Winnie.png" onclick="showModal()" class="underline cursor-pointer text-blue-500 hover:opacity-50">Winnie</span> 
+      <article class="px-4 mb-8 sm:px-6 lg:px-0">
+        <div class="mx-auto">
+          <div class="max-w-xl mx-auto mt-12 mb-24 2xl:max-w-2xl sm:my-24 lg:my-40 xl:my-48 2xl:my-56">
+            <h1 class="mb-4 text-2xl leading-snug md:mb-6 sm:text-3xl lg:text-3-75xl 2xl:text-4xl">
+              Sam is junior at Columbia University studying Computer Science and History.
+            </h1>
+          </div>
+          <div class=" text-blue-100 flex flex-col justify-center items-center pb-24">
+            <section id="projects" class="pb-16 min-h-60 flex flex-col justify-center items-center">
+              <div class="max-w-2xl mx-auto">
+                <h2 class="text-lg mb-6 sm:mb-8 lg:mb-10">Projects</h2>
+              </div>
+              <h1>Welcome to Video Poker!</h1>
+              <h2 class="game-mode">Choose Game Mode</h2>
 
-            <span class="absolute hidden group-hover:flex inset-0 bg-black bg-opacity-50 items-center justify-center">
-              <span class="p-1 bg-blue-100 rounded-lg shadow-2xl shadow-inner">
-                <img src="pub/images/Winnie.png" alt="My cat" class="rounded-md max-w-xs">
-              </span>
-            </span>
-          </span>
-            and I moved to NYC, where I am now working toward completing my BA and finding an exciting role in the tech industry!
-          </p>
+              <div id="game-container">
+                <div class="min-h-16">
+                  <button id="normal" class="button hover:h-10 hover:w-32 transition duration-150 ease-in-out"
+                                      type="button">5 Card</button>
+                  <button id="wild" class="button hover:h-10 hover:w-32 transition duration-150 ease-in-out"
+                                    type="button">2s Wild</button>
+                </div>
+                </div>
+              </section>
+              <section id="contact" class="max-w-2xl pb-12 mx-auto sm:pb-24 lg:pb-40">
+                <div class="max-w-2xl mx-auto flex flex-row justify-center">
+                  <h2 class="text-lg mb-6 sm:mb-8 lg:mb-10">Contact</h2>
+                </div>
+                <div class="flex flex-row items-center space-x-6">
+                  <a class="mx-4" href="mailto:sw3927@columbia.edu">Email</a>
+                  <a class="mx-4" href="www.linkedin.com/in/samuel-weldon-a932431b8">Linkedin</a>
+                </div>
+              </section> 
+            </div>
+        </div>
       </article>
 
-      <div class="font-SCPro text-blue-100 flex flex-col justify-center items-center pb-24">
-        <h1>Welcome to Video Poker!</h1>
-        <h2 class="game-mode">Choose Game Mode</h2>
-
-        <div id="game-container">
-          <button id="normal" class="button" type="button">Stright 5 Card</button>
-          <button id="wild" class="button" type="button">Dueces Wild</button>
-        </div>
-      </div>
     </main>
 
   </body>
