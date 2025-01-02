@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="pub/styles.css">
     <link rel="icon" href="pub/images/favicon4.png" type="image/png">
     <script type="module" src="./src/js/Poker/test.js"></script> 
+    <script src="https://d3js.org/d3.v7.min.js"></script>
   </head>
 
-  <body class="text-blue-100 h-screen bg-cover bg-center relative bg-no-repeat bg-deeperBlue">
+  <body class="text-blue-100 h-screen bg-cover bg-center relative bg-no-repeat bg-deepBlue">
     <!--style="background-image: url(pub/images/BlueBG.png)")-->
 
     <header role="banner" class="relative flex flex-col items-center justify-between bg-opacity-50 
@@ -40,14 +41,32 @@
             </h1>
           </div>
           <div class=" text-blue-100 flex flex-col justify-center items-center pb-24">
-            <section id="projects" class="pb-16 min-h-60 flex flex-col justify-center items-center">
-              <div class="max-w-2xl mx-auto">
-                <h2 class="text-lg mb-6 sm:mb-8 lg:mb-10">Projects</h2>
-              </div>
-              <h1>Welcome to Video Poker!</h1>
-              <h2 class="game-mode">Choose Game Mode</h2>
+            <div class="max-w-2xl mx-auto">
+              <h2 class="text-2xl mb-6 sm:mb-8 lg:mb-10">Projects</h2>
+            </div>
+            <section id="projects" class="pb-16 min-h-60 flex flex-row justify-center items-center space-x-12">
 
-              <div id="game-container">
+              <div id="coach-graphs" class="bg-deeperBlue shadow-xl rounded hover:scale-105 transition duration-300
+                                            w-400 h-480">
+                <h1 class="text-center">Everyone Hates Coaches</h2>
+                <div class="min-h-16" class="flex flex-col items-center justify-center">
+                  <svg width="400" height="460"> 
+                    <g transform="translate(70, 70)">
+                    <circle/>
+                    <circle cx="120" />
+                    <circle cx="240" />
+                    <circle cx="360" />
+                    <circle cx="480" />
+                    </g>
+                  </svg>
+                </div> 
+              </div> 
+
+              <div id="game-container" class="bg-deeperBlue shadow-xl flex flex-col items-center justify-center rounded
+                                              w-400 h-480 hover:scale-105 transition duration-300">
+                <h1>Welcome to Video Poker!</h1>
+                <h2 class="game-mode">Choose Game Mode</h2>
+
                 <div class="min-h-16">
                   <button id="normal" class="button hover:h-10 hover:w-32 transition duration-150 ease-in-out"
                                       type="button">5 Card</button>
@@ -56,9 +75,11 @@
                 </div>
                 </div>
               </section>
+
+
               <section id="contact" class="max-w-2xl pb-12 mx-auto sm:pb-24 lg:pb-40">
                 <div class="max-w-2xl mx-auto flex flex-row justify-center">
-                  <h2 class="text-lg mb-6 sm:mb-8 lg:mb-10">Contact</h2>
+                  <h2 class="text-2xl mb-6 sm:mb-8 lg:mb-10">Contact</h2>
                 </div>
                 <div class="flex flex-row items-center space-x-6">
                   <a class="mx-4" href="mailto:sw3927@columbia.edu">Email</a>
@@ -70,6 +91,7 @@
       </article>
 
     </main>
+    <script src="./src/js/Coaches/graphs.js"></script>
 
   </body>
 

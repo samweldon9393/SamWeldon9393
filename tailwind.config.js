@@ -19,6 +19,10 @@ module.exports = {
             SCPro: ['Source Code Pro'],
             Kanit: ['Kanit'],
             Oran: ['Oranienbaum']
+        },
+        spacing: {
+            '400': '25rem',
+            '480': '30rem',
         }
     },
   },
