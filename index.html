@@ -13,7 +13,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
   </head>
 
-  <body class="text-blue-100 h-screen bg-cover bg-center relative bg-no-repeat bg-deepBlue">
+  <body class="text-blue-100 h-screen bg-cover bg-center relative bg-no-repeat bg-deepBlue font-Kanit">
     <!--style="background-image: url(pub/images/BlueBG.png)")-->
 
     <header role="banner" class="relative flex flex-col items-center justify-between bg-opacity-50 
@@ -21,7 +21,7 @@
       <img class="flex-shrink-0 items-center h-24 w-24 min-h-20 min-w-20 hover:rotate-180 
                    transition-transform duration-500 opacity-90 transition object-fill"
            src="pub/images/SFWblue.png" alt="Sam Weldon" />
-      <nav class="sm:ml-auto sm:pt-0 text-blue-100 pb-10">
+      <nav class="sm:ml-auto sm:pt-0 text-blue-100 pb-10 text-blue-200">
         <ul class="flex space-x-6 sm:space-x-12 lg:space-x-16 xl:space-x-16 2xl:space-x-20
            ">
           <li class="Card">  <a class="Link" href="./about.html">About</a> </li>
@@ -36,36 +36,38 @@
       <article class="px-4 mb-8 sm:px-6 lg:px-0">
         <div class="mx-auto">
           <div class="max-w-xl mx-auto mt-12 mb-24 2xl:max-w-2xl sm:my-24 lg:my-40 xl:my-48 2xl:my-56">
-            <h1 class="mb-4 text-2xl leading-snug md:mb-6 sm:text-3xl lg:text-3-75xl 2xl:text-4xl">
+            <h1 class="mb-4 text-2xl leading-snug md:mb-6 sm:text-3xl lg:text-3-75xl 2xl:text-4xl font-sans">
               Sam is junior at Columbia University studying Computer Science and History.
             </h1>
           </div>
           <div class=" text-blue-100 flex flex-col justify-center items-center pb-24">
-            <div class="max-w-2xl mx-auto">
-              <h2 class="text-2xl mb-6 sm:mb-8 lg:mb-10">Projects</h2>
-            </div>
-            <section id="projects" class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
+            <section id="projects">
+              <div class="flex flex-col items-center justify-center">
+                <h2 class="text-2xl mb-6 sm:mb-8 lg:mb-10">Projects</h2>
+              </div>
+              <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
 
-              <div id="coach-graphs" class="bg-deeperBlue shadow-xl rounded hover:scale-105 transition duration-300
-                                            w-400 h-480 my-4 md:my-2 lg:my-0 mx-0">
-                <h1 class="text-center mt-2">Reddit Hates Coaches</h2>
-                <div class="flex flex-col items-center justify-center">
+                <div id="coach-graphs" class="bg-deeperBlue shadow-xl rounded hover:scale-105 transition duration-300
+                                              w-400 h-480 my-4 md:my-2 lg:my-0 mx-0">
+                  <h1 class="text-center mt-2">Reddit Hates Coaches</h2>
+                  <div class="flex flex-col items-center justify-center">
+                  </div> 
                 </div> 
-              </div> 
 
-              <div id="game-container" class="bg-deeperBlue shadow-xl flex flex-col items-center justify-center rounded
-                                              w-400 h-480 my-2 md:my-0 hover:scale-105 transition duration-300 mx-0">
-                <h1>Welcome to Video Poker!</h1>
-                <h2 class="game-mode">Choose Game Mode</h2>
+                <div id="game-container" class="bg-deeperBlue shadow-xl flex flex-col items-center justify-center rounded
+                                                w-400 h-480 my-2 md:my-0 hover:scale-105 transition duration-300 mx-0">
+                  <h1>Welcome to Video Poker!</h1>
+                  <h2 class="game-mode">Choose Game Mode</h2>
 
-                <div class="min-h-16">
-                  <button id="normal" class="button hover:h-10 hover:w-32 transition duration-300 ease-in-out"
-                                      type="button">5 Card</button>
-                  <button id="wild" class="button hover:h-10 hover:w-32 transition duration-300 ease-in-out"
-                                    type="button">2s Wild</button>
+                  <div class="min-h-16">
+                    <button id="normal" class="button hover:h-10 hover:w-32 transition duration-300 ease-in-out"
+                                        type="button">5 Card</button>
+                    <button id="wild" class="button hover:h-10 hover:w-32 transition duration-300 ease-in-out"
+                                      type="button">2s Wild</button>
+                  </div>
                 </div>
-                </div>
-              </section>
+              </div>
+            </section>
 
 
               <section id="contact" class="max-w-2xl pb-12 mx-auto sm:pb-24 lg:pb-40">

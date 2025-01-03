@@ -834,10 +834,6 @@ video {
      object-fit: fill;
 }
 
-.p-1{
-  padding: 0.25rem;
-}
-
 .p-4{
   padding: 1rem;
 }
@@ -893,8 +889,8 @@ video {
   font-family: Oranienbaum;
 }
 
-.font-SCPro{
-  font-family: Source Code Pro;
+.font-mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .font-sans{
@@ -930,9 +926,9 @@ video {
   color: rgb(219 234 254 / var(--tw-text-opacity, 1));
 }
 
-.text-blue-300{
+.text-blue-200{
   --tw-text-opacity: 1;
-  color: rgb(147 197 253 / var(--tw-text-opacity, 1));
+  color: rgb(191 219 254 / var(--tw-text-opacity, 1));
 }
 
 .text-blue-500{
