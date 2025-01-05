@@ -96,7 +96,7 @@ export class Game {
 
         const inputField = document.createElement('input');
         inputField.type = 'text';
-        inputField.placeholder = 'Enter bet?';
+        inputField.placeholder = 'Enter bet:';
         inputField.name = 'bet';
         inputField.style.width = '100%';
         form.appendChild(inputField);  
@@ -112,13 +112,15 @@ export class Game {
 
         this.gameContainer.appendChild(form);
 
-        // Add form submit event listener
+        //listen to submit button 
         form.addEventListener('submit', (event) => {
             event.preventDefault(); // Prevent form from refreshing the page
             const bet = inputField.value;
             
-            while (bet > this.p.bankroll || bet <= 0){
-                alert('No free rides or debt allowed!');
+            //regex tests if every character in the bet is a digit
+            //this loops until user enters a valid bet
+            while (!(/^\d+$/.test(bet)) || bet > this.p.bankroll || bet <= 0){
+                alert('No free rides or debt allowed! Enter a valid integer.');
                 return;
             }
 
@@ -136,6 +138,9 @@ export class Game {
         this.gameContainer.innerHTML = '';
 
         this.printBankroll();
+
+        const sendback = document.createElement('p');
+        sendback.textContent = 'Select Cards to Exchange';
 
         const form = document.createElement('form');
         form.classList.add('py-2', 'text-black');
@@ -181,6 +186,7 @@ export class Game {
         submitButton.textContent = 'Submit';
         form.appendChild(submitButton);
 
+        this.gameContainer.appendChild(sendback);
         this.gameContainer.appendChild(form);
 
         //add form submit event listener
@@ -250,7 +256,7 @@ export class Game {
  * Prompts user to continue playing. @return user input, or breaks play Loops
  * if user is out of tokens.
  ****************************************************************************/
-    payOut(){ //TODO this should take mode as a param
+    payOut(){ 
         
 
         let bestHand;
