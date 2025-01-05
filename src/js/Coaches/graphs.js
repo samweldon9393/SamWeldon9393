@@ -307,7 +307,7 @@ function chart()  {
         .attr("transform", `translate(0,${height - marginBottom})`)
         .call(g => g.select(".domain").remove())
         .call(g => g.append("text")
-            .attr("x", +220)
+            .attr("x", +200)
             .attr("y", 18)
             .attr("fill", "currentColor")
             .attr("text-anchor", "middle")
@@ -330,13 +330,21 @@ function chart()  {
             .attr("text-anchor", "start")
             .text("Comments"));
 
-    d3.select("div")
-        .on('click', function(e, d) {
-            d3.select('h4')
-                .text(`Reddit Hates Coaches`)
-        });
     d3.selectAll("rect")
         .on('mouseover', function(e, d) {
+            d3.select(this)
+                .classed('hovered', true);
+            d3.select('h4')
+                .text(`${d.coach}: ${d.positive_count} Positive / ${d.negative_count} Negative`)
+        })
+        .on('mouseout', function(e, d) {
+            d3.select(this)
+                .classed('hovered', true);
+            d3.select('h4')
+                .text('Reddit Hates Coaches');
+        });
+    d3.selectAll("rect")
+        .on('click', function(e, d) {
             d3.select(this)
                 .classed('hovered', true);
             d3.select('h4')

@@ -1184,6 +1184,11 @@ video {
   opacity: 0.9;
 }
 
+.hovered:active{
+  fill: #f1f5f9;
+  opacity: 0.9;
+}
+
 .hidden:hover{
   opacity: 0.5;
 }
