@@ -10,13 +10,13 @@
     <link rel="icon" href="pub/images/favicon4.png" type="image/png">
   </head>
   <body class="relative bg-deepBlue text-white font-Kanit">
-   <header role="banner" class="relative flex flex-col items-center justify-between bg-opacity-50 
-                         px-4 pt-4 sm:flex-row md:px-8 sm:py-6 lg:px-10 2xl:py-2 2xl:px12"> 
-     <a href="./index.html"> 
-       <img class="flex-shrink-0 items-center h-24 w-24 min-h-20 min-w-20 hover:rotate-180 
-                    transition-transform duration-500 opacity-90 transition object-fill"
-            src="pub/images/SFWblue.png" alt="Sam Weldon" />
-     </a>
+    <header role="banner" class="relative flex flex-col items-center justify-between bg-opacity-50 
+                                 px-4 pt-8 sm:flex-row md:px-8 sm:py-2 lg:px-10 2xl:py-0 2xl:px12"> 
+      <a href="./index.html"> 
+        <img class="flex-shrink-0 items-center h-6 w-16 min-h-6 min-w-16 hover:rotate-180 
+                    transition-transform duration-500 opacity-90 transition object-fill hover:cursor-pointer"
+             src="pub/images/favicon2.png" alt="Sam Weldon" />
+      </a>
       <nav class="sm:ml-auto sm:pt-0 text-blue-200 pb-10">
         <ul class="flex space-x-6 sm:space-x-12 lg:space-x-16 xl:space-x-16 2xl:space-x-20">
           <li class="Card">  <a class="clickedLink" href="./about.html">About</a> </li>
@@ -27,25 +27,43 @@
       </nav>
     </header> 
 
-    <div class="flex justify-center flex-wrap px-4 pt-20 mb-8 sm:px-6 lg:px-0 ">
-      <div class="max-h-80 max-w-80 px-4 mb-4">
-        <img class="rounded shadow min-w-72 " src="pub/images/Headshot.jpg" alt="Picture of Me" />
-      </div>
-      <div class="min-w-72">
-        <h1 class="text-2xl ">Hi, I'm Sam</h1>
-        <p class="font-mono text-sm max-w-80 font-sans">
-        I spent my most of my twenties working in sales and automotive service. I realized I needed to see what else life had to offer, so I went back to school in January of 2020. It turned out that 2020 was a pretty interesting year to make big life changes. Along with school I started cooking at a BBQ restaurant in the mornings and tutoring in the afternoons, and in May of 2023 I graduated from Housatonic Community College in Bridgeport, CT before continuing my studies (now full time) at Columbia University. In September, my cat
-        <span class="group"><span href="pub/images/Winnie.png" class="underline cursor-pointer text-blue-500">Winnie</span> 
+    <main id="main-content" class="mx-auto">
+      <div class="bg-fixed bg-auto bg-no-repeat opacity-75" style="background-image: url(pub/images/sky1.png)">
+        <p class="text-deepBlue">_</p>
+        <div class="flex justify-center flex-wrap px-4 pt-20 mb-8 sm:px-6 lg:px-0 ">
+          <div class="max-h-96 max-w-96 px-4 mb-4">
+            <img class="rounded shadow min-w-80" src="pub/images/Me2.JPG" alt="Picture of Me" />
+          </div>
+          <div class="min-w-72">
+            <h1 class="text-2xl text-center">Hi, I'm Sam</h1>
+            <p class="font-mono text-sm max-w-80 font-sans text-justify">
+            I'm the one in the middle. I spent my most of my twenties working in sales and automotive service. I realized I needed to see what else life had to offer, so I went back to school in January of 2020. I started cooking at a BBQ restaurant in the mornings and tutoring English in the afternoons. In May of 2023 I graduated from Housatonic Community College in Bridgeport, CT before continuing my studies (now full time) at Columbia University. In September, my cat
+            <span class="group"><span href="pub/images/Winnie.png" class="underline cursor-pointer text-blue-500">Winnie</span> 
 
-          <span class="hidden group-hover:flex items-center justify-center">
-            <span class="rounded-md shadow-2xl">
-              <img src="pub/images/Winnie.png" alt="My cat" class="rounded-md max-w-xs">
+              <span class="hidden group-hover:flex items-center justify-center">
+                <span class="rounded-md shadow-2xl">
+                  <img src="pub/images/Winnie.png" alt="My cat" class="rounded-md max-w-xs">
+                </span>
+              </span>
             </span>
-          </span>
-        </span>
-        and I moved to NYC, where I am now working toward completing my BA.
-        </p>
-      </div>
-    </div>
+            and I moved to NYC, where I am now working toward completing my BA. I like coding and being creative, but when I'm not doing that I like following the Mets and the Nets (never the Jets though).
+            </p>
+          </div>
+        </div>
+        <section id="contact" class="max-w-2xl pb-12 mx-auto sm:pb-24 lg:pb-40">
+          <div class="max-w-2xl mx-auto flex flex-row justify-center">
+            <h2 class="text-2xl mt-4 mb-6">Contact</h2>
+          </div>
+          <div class="flex flex-row items-center justify-center space-x-10">
+            <a class="mx-2 flex flex-row items-center justify-center" href="mailto:sw3927@columbia.edu">
+              <img class="max-h-8 max-w-8 mx-1 hover:rotate-180 transition duration-300" src="pub/images/email.png" alt="Email Logo" />
+              Email</a>
+            <a class="mx-1 flex flex-row items-center justify-center" href="https://www.linkedin.com/in/samuel-weldon-a932431b8">
+              <img class="max-h-10 max-w-10 hover:rotate-180 transition duration-300" src="pub/images/linkedin.png" alt="LinkedIn Logo" />
+              Linkedin</a>
+          </div>
+        </section>
+      </div> 
+    </main>
   </body>
 </html>
