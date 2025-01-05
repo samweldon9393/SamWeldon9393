@@ -261,7 +261,7 @@ function chart()  {
     const height = 450;
     const marginTop = 30;
     const marginRight = 0;
-    const marginBottom = 0;
+    const marginBottom = 20;
     const marginLeft = 40;
 
     // Declare the x (horizontal position) scale.
@@ -278,7 +278,7 @@ function chart()  {
     // Create the SVG container.
     const svg = d3.select("svg");
 
-    // Add a rect for each bar.
+    // Add a rect for each negative bar.
     svg.append("g")
         .attr("fill", "red")
         .selectAll()
@@ -287,8 +287,9 @@ function chart()  {
         .attr("x", (d) => x(d.coach))
         .attr("y", (d) => y(d.negative_count))
         .attr("height", (d) => y(1) - y(d.negative_count))
+        .classed('graph-bar', true)
         .attr("width", x.bandwidth());
-    // Add a rect for each bar.
+    // Add a rect for each positve bar.
     svg.append("g")
         .attr("fill", "steelblue")
         .selectAll()
@@ -297,12 +298,22 @@ function chart()  {
         .attr("x", (d) => x(d.coach))
         .attr("y", (d) => y(d.positive_count))
         .attr("height", (d) => y(1) - y(d.positive_count))
+        .classed('graph-bar', true)
         .attr("width", x.bandwidth());
 
 
     // Add the x-axis and label.
     svg.append("g")
         .attr("transform", `translate(0,${height - marginBottom})`)
+        .call(g => g.select(".domain").remove())
+        .call(g => g.append("text")
+            .attr("x", +220)
+            .attr("y", 18)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "middle")
+            .classed("text-lg", true)
+            .classed("font-SCPro", true)
+            .text("Coach"));
 
     // Add the y-axis and label, and remove the domain line.
     svg.append("g")
@@ -310,11 +321,14 @@ function chart()  {
         .call(d3.axisLeft(y).tickFormat((y) => (y * 1).toFixed()))
         .call(g => g.select(".domain").remove())
         .call(g => g.append("text")
-            .attr("x", -marginLeft)
-            .attr("y", 10)
+            .attr("x", +5 -marginLeft)
+            .attr("y", 20)
             .attr("fill", "currentColor")
+            .classed("mt-4", true)
+            .classed("text-lg", true)
+            .classed("font-SCPro", true)
             .attr("text-anchor", "start")
-            .text("↑ Ratio (%)"));
+            .text("Comments"));
 
     d3.select("div")
         .on('click', function(e, d) {
@@ -323,6 +337,8 @@ function chart()  {
         });
     d3.selectAll("rect")
         .on('mouseover', function(e, d) {
+            d3.select(this)
+                .classed('hovered', true);
             d3.select('h4')
                 .text(`${d.coach}: ${d.positive_count} Positive / ${d.negative_count} Negative`)
         });
