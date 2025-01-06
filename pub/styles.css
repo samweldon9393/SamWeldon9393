@@ -1411,10 +1411,6 @@ video {
     margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
-  .sm\:bg-fixed{
-    background-attachment: fixed;
-  }
-
   .sm\:px-6{
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -1460,14 +1456,6 @@ video {
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
-  .md\:bg-auto{
-    background-size: auto;
-  }
-
-  .md\:bg-fixed{
-    background-attachment: fixed;
-  }
-
   .md\:px-8{
     padding-left: 2rem;
     padding-right: 2rem;
@@ -1507,6 +1495,10 @@ video {
     --tw-space-x-reverse: 0;
     margin-right: calc(4rem * var(--tw-space-x-reverse));
     margin-left: calc(4rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .lg\:bg-auto{
+    background-size: auto;
   }
 
   .lg\:px-0{
