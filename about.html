@@ -23,7 +23,7 @@
         <ul class="flex space-x-6 sm:space-x-12 lg:space-x-16 xl:space-x-16 2xl:space-x-20">
           <li class="Card">  <a class="clickedLink" href="./about.html">About</a> </li>
           <li class="Card">  <a class="Link" href="index.html#projects">Projects</a> </li>
-          <li class="Card"> <a class="Link" href="https://google.com">Photos</a> </li>
+          <li class="Card"> <a class="Link" href="./photos.html">Photos</a> </li>
           <li class="Card"> <a class="Link" href="index.html#contact">Contact</a> </li>
         </ul>
       </nav>
@@ -38,17 +38,37 @@
           </div>
           <div class="min-w-72">
             <h1 class="text-2xl text-center">Hi, I'm Sam</h1>
-            <p class="font-mono text-sm max-w-80 font-sans text-justify">
+            <p class="font-mono text-sm max-w-80 font-sans text-justify relative">
             I'm the one in the middle. I spent my most of my twenties working in sales and automotive service. I realized I needed to see what else life had to offer, so I went back to school in January of 2020. I started cooking at a BBQ restaurant in the mornings and tutoring English in the afternoons. In May of 2023 I graduated from Housatonic Community College in Bridgeport, CT before continuing my studies (now full time) at Columbia University. In September, my cat
-            <span class="group"><span href="pub/images/Winnie.png" class="underline cursor-pointer text-blue-500">Winnie</span> 
+            <span id="winnie-group" class="group absolute"><span href="pub/images/Winnie.png"
+                class="underline cursor-pointer text-blue-500">Winnie</span> 
 
-              <span class="hidden group-hover:flex items-center justify-center">
-                <span class="rounded-md shadow-2xl">
+              <span id="winnie" class="hidden group-hover:flex items-center justify-center shadow-2xl">
+                <span class="rounded-md">
                   <img src="pub/images/Winnie.png" alt="My cat" class="rounded-md max-w-xs">
                 </span>
               </span>
+
+              <!-- CSS is good enough for hover effect but on mobile it doesn't work so 
+                   a little JS adds click functionality to show and hide Winnie pic -->
+              <script>
+                const wg = document.getElementById('winnie-group');
+                wg.addEventListener('click', (event) => {
+                  const h = document.getElementsByClassName('hidden');
+                  const w = document.getElementById('winnie');
+
+                  if (h.length === 0){
+                    w.classList.add('hidden');
+                  }
+                  else {
+                    w.classList.remove('hidden');
+                  }
+                });
+              </script>
+               
+              <!-- Winnie's name is overlaid twice so text won't move on hover -->
             </span>
-            and I moved to NYC, where I am now working toward completing my BA. I like coding and being creative, but when I'm not doing that I like following the Mets and the Nets (never the Jets though).
+            Winnie and I moved to NYC, where I am now working toward completing my BA. I like coding and being creative, but when I'm not doing that I like following the Mets and the Nets (never the Jets though).
             </p>
           </div>
         </div>
