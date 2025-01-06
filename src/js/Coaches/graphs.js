@@ -280,7 +280,7 @@ function chart()  {
 
     // Add a rect for each negative bar.
     svg.append("g")
-        .attr("fill", "red")
+        .attr("fill", "#DE608F")
         .selectAll()
         .data(coaches)
         .join("rect")
@@ -291,7 +291,7 @@ function chart()  {
         .attr("width", x.bandwidth());
     // Add a rect for each positve bar.
     svg.append("g")
-        .attr("fill", "steelblue")
+        .attr("fill", "#5382B0")
         .selectAll()
         .data(coaches)
         .join("rect")
