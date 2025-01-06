@@ -988,6 +988,10 @@ video {
   --tw-bg-opacity: 0.5;
 }
 
+.bg-\[length\:800px_600px\]{
+  background-size: 800px 600px;
+}
+
 .bg-cover{
   background-size: cover;
 }
@@ -1456,6 +1460,10 @@ video {
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
+  .md\:bg-auto{
+    background-size: auto;
+  }
+
   .md\:px-8{
     padding-left: 2rem;
     padding-right: 2rem;
@@ -1495,10 +1503,6 @@ video {
     --tw-space-x-reverse: 0;
     margin-right: calc(4rem * var(--tw-space-x-reverse));
     margin-left: calc(4rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .lg\:bg-auto{
-    background-size: auto;
   }
 
   .lg\:px-0{
