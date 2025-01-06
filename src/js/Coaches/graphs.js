@@ -391,13 +391,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'Analysis used a pre-trained model, and the data collection was a bit crude ' +
             'due to technical/time limitations, but the results do track very closely to ' +
             'expected values based on anecdotal knowledge of public sentiment surrounding subjects. '+
-            '\nLearn more on:';
+            '\nSee the code and findings write up on:';
 
 
         const link = document.createElement('a');
         link.href = "https://github.com/samweldon9393/Reddit-Hates-Coaches";
         link.classList.add('ml-44');
-        link.classList.add('mt-2');
         link.classList.add('go-back');
         link.textContent = 'GitHub';
 
@@ -406,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
         back.textContent = 'See Graph Again';
         back.classList.add('go-back');
         back.classList.add('text-center');
-        back.classList.add('mt-2');
+        back.classList.add('mt-1');
         
         div.appendChild(header);
         div.appendChild(expl);
