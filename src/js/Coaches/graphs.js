@@ -1,3 +1,7 @@
+/* 
+ * Turned small SQL database into a JSON file and just put the plain text 
+ * in here since it's pretty small and this is easiest.
+ */ 
 coaches = [
     {
         "coach": "Adrian Griffin",
@@ -254,7 +258,11 @@ coaches = [
 ]
 
 
-
+/*
+ * This is mostly straight from the d3 documentation, just made the necesary
+ * changes for sizing and to work with my data. The positives are laid
+ * over the negatives since in almost all cases there were nore negatives.
+ */
 function chart()  {
     // Declare the chart dimensions and margins.
     const width = 400;
@@ -330,6 +338,7 @@ function chart()  {
             .attr("text-anchor", "start")
             .text("Comments"));
 
+    // mouseover and hover to work on mobile and desktop
     d3.selectAll("rect")
         .on('mouseover', function(e, d) {
             d3.select(this)
@@ -357,9 +366,11 @@ function chart()  {
 }
 chart();
 
-//function info(){
-//  const svg = d3.selectAll('svg');
 
+/*
+ * Replaces the project window with this text description.
+ * See graph again reloads the page, it maintains position.
+ */
 document.addEventListener('DOMContentLoaded', () => {
 
     //attach event listeners to the initial buttons
