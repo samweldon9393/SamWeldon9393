@@ -344,7 +344,7 @@ function chart()  {
             d3.select(this)
                 .classed('hovered', true);
             d3.select('h4')
-                .text(`${d.coach}: ${d.positive_count} Positive / ${d.negative_count} Negative`)
+                .text(`${d.coach}: +${d.positive_count} / -${d.negative_count}`)
         })
         .on('mouseout', function(e, d) {
             d3.select(this)
@@ -357,7 +357,7 @@ function chart()  {
             d3.select(this)
                 .classed('hovered', true);
             d3.select('h4')
-                .text(`${d.coach}: ${d.positive_count} Positive / ${d.negative_count} Negative`)
+                .text(`${d.coach}: +${d.positive_count} / -${d.negative_count}`)
         });
 
 
@@ -416,6 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         back.textContent = 'See Graph Again';
         back.classList.add('go-back');
         back.classList.add('text-center');
+        back.classList.add('hover:cursor-pointer');
         back.classList.add('mt-1');
         
         div.appendChild(header);
