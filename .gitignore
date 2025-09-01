@@ -1,0 +1,16 @@
+*.db
+*.json 
+pub/images/*
+src/js/Poker/*
+dist/
+default-tailwind.config.js
+node_modules/
+
+package-lock.json
+package.json
+
+pub/tailwind.css
+pub/test_index.html
+src/styles.css
+
+tailwind.css
