@@ -1,24 +1,29 @@
-<h1> My Personal Website </h1>
+# My Personal Website  
 
-<p> This website acts as a portfolio - a place to display what I'm working on
-or have worked on, as well tell interested parties a little bit about myself
-and share some pictures with friends and family!</p>
+This website acts as my **portfolio** — a place to:  
+- Showcase what I’m currently working on (and past projects)  
+- Share a little bit about myself  
+- Post photos for friends and family  
 
-<h3>
-Projects Section
-</h3>
-<p> Right now I just have four projects posted here, but as soon as I get the 
-time I have a couple of new things to add.</p>
-<p> Reddit Hates Coaches can be found on my GitHub. I used d3 to create an 
-interactive graph. I like the bar graph because it illustrates the relationship
-between comment volume and sentiment. </p>
+---
 
--------
-Sources 
--------
+## Projects  
 
-Background image:
-https://www.deviantart.com/mischiefidea/art/Textures-002-Night-Sky-180375638
+At the moment, there are **four projects** posted here. I’ll be adding more soon!  
 
-Gallery code:
-https://tailwindflex.com/@anonymous/image-gallery
+### Featured: [Reddit Hates Coaches](https://github.com/samweldon9393/Reddit-Hates-Coaches)  
+- Built using **D3.js** to create an **interactive graph**  
+- Highlights the relationship between **comment volume** and **sentiment**  
+- My favorite piece is the bar graph, which makes the sentiment–volume relationship visually clear  
+
+---
+
+## Sources  
+
+- **Background image**: [Night Sky Texture by Mischiefidea](https://www.deviantart.com/mischiefidea/art/Textures-002-Night-Sky-180375638)  
+- **Gallery code**: [TailwindFlex – Image Gallery](https://tailwindflex.com/@anonymous/image-gallery)  
+
+---
+
+Thanks for visiting my portfolio!
+
