@@ -25,7 +25,6 @@
       height: 480px;
       overflow: hidden;
       position: relative;
-      border-radius: 0.75rem; /* ~rounded-xl */
     }
 
     /* Title area */
@@ -96,7 +95,7 @@
                 <div id="iframe-components">
                 <div
                     id="sing-sing-maps"
-                    class="border-dotted shadow-xl rounded-xl hover:scale-105 transition duration-300
+                    class="border-dotted shadow-xl hover:scale-105 transition duration-300
                            w-[400px] h-[480px] my-4 md:my-2 lg:my-0 mx-0 text-blue-100
                            overflow-hidden relative"
                   >
@@ -113,7 +112,7 @@
 
                 <!-- Safe Works -->
                 <div id="iframe-components">
-                <div id="safe-works" class="shadow-xl rounded-xl hover:scale-105 transition duration-300
+                <div id="safe-works" class="shadow-xl hover:scale-105 transition duration-300
                                                w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100">
                   <h4 class="text-center mt-1 mb-1">SafeWorks: Harm Reduction Service Locator</h4>
                   <a href="https://samweldon9393.github.io/SafeWorks/" target="_blank" rel="noopener noreferrer">
@@ -139,7 +138,7 @@
               <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
 
                 <!-- Coach Graphs -->
-                  <div id="coach-graphs" class="border-dotted shadow-xl rounded-xl hover:scale-105 transition duration-300
+                  <div id="coach-graphs" class="border-dotted shadow-xl hover:scale-105 transition duration-300
                                                w-400 h-480 my-4 md:my-2 lg:my-0 mx-0 text-blue-100">
                   <div class="flex flex-row justify-end">
                     <img class="more-info max-w-20 max-h-20 mb-8 absolute hover:cursor-pointer" src="./pub/images/Info.png" alt="=>" />
@@ -151,13 +150,39 @@
                   </div>
                   </div>
 
-                  <!-- Sing Sing Animations
-                <div id="sing-sing-animations" class="shadow-xl rounded-xl hover:scale-105 transition duration-300
-                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100">
+                  <!-- Sing Sing Animations -->
+                <div id="sing-sing-animations" class="shadow-xl hover:scale-105 transition duration-300
+                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100 bg-black bg-opacity-50">
                   <h4 class="text-center mt-1 mb-1">Sing Sing Prison Museum Animations</h4>
-                  <video controls class="mx-2 mt-8 h-96 w-96 rounded-lg" src="./pub/images/Alone.mp4" type="video/mp4"></video>
+
+                  <!-- Video container -->
+                  <div class="relative flex items-center justify-center mt-4">
+                    <!-- Left arrow -->
+                    <button
+                        onclick="prevVideo()"
+                        class="absolute left-2 text-2xl bg-black/50 rounded-full px-2 py-1 hover:bg-white"
+                        aria-label="Previous video"
+                        >
+                        ‹
+                    </button>
+
+                      <video
+                          id="sing-sing-video"
+                          controls
+                          class="group-hover:opacity-100 opacity-90 transition pt-20"
+                          src="./pub/images/Alone.mp4"
+                          ></video>
+
+                      <!-- Right arrow -->
+                      <button
+                          onclick="nextVideo()"
+                          class="absolute right-2 text-2xl bg-black/50 rounded-full px-2 py-1 hover:bg-black"
+                          aria-label="Next video"
+                          >
+                          ›
+                      </button>
+
                 </div> 
-                  -->
 
               </div> 
             </section>
@@ -169,16 +194,16 @@
               </div>
               <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
 
-                <div id="mymake" class="shadow-xl rounded-xl hover:scale-105 transition duration-300
-                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100">
+                <div id="mymake" class="shadow-xl hover:scale-105 transition duration-300
+                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100 bg-black bg-opacity-50">
                   <h4 class="text-center mt-1 mb-1">MyMake: Implement make in C++</h4>
-                  <video controls class="mx-2 mt-8 h-96 w-96 rounded-lg" src="./pub/images/mymake2.mp4" type="video/mp4"></video>
+                  <video controls class="mx-2 mt-8 h-96 w-96 " src="./pub/images/mymake2.mp4" type="video/mp4"></video>
                 </div> 
 
-                <div id="lab7" class="shadow-xl rounded-xl hover:scale-105 transition duration-300
-                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100">
+                <div id="lab7" class="shadow-xl hover:scale-105 transition duration-300
+                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100 bg-black bg-opacity-50">
                   <h4 class="text-center mt-1 mb-1">Webserver: Web Server from scratch in C</h4>
-                  <video controls class="mx-2 mt-8 h-96 w-96 rounded-lg" src="./pub/images/lab7.mp4" type="video/mp4"></video>
+                  <video controls class="mx-2 mt-8 h-96 w-96 " src="./pub/images/lab7.mp4" type="video/mp4"></video>
 
                 </div> 
 
@@ -226,5 +251,36 @@
     <script src="./src/js/Coaches/graphs.js"></script>
 
   </body>
+
+<script>
+  const videos = [
+    "./pub/images/Alone.mp4",
+    "./pub/images/Forgiveness.mp4",
+    "./pub/images/Love.mp4"
+  ];
+
+  let currentVideoIndex = 0;
+
+  const videoEl = document.getElementById("sing-sing-video");
+
+  function loadVideo(index) {
+    videoEl.pause();
+    videoEl.src = videos[index];
+    videoEl.load();
+    //videoEl.play();
+  }
+
+  function nextVideo() {
+    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+    loadVideo(currentVideoIndex);
+  }
+
+  function prevVideo() {
+    currentVideoIndex =
+      (currentVideoIndex - 1 + videos.length) % videos.length;
+    loadVideo(currentVideoIndex);
+  }
+</script>
+
 
 </html>
