@@ -4,50 +4,63 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Sam Weldon's personal portfolio site (sam-weldon.com). A hand-written static site — three HTML pages, one stylesheet, one JS file. No framework, no bundler, no tests, no linter. The only build step is Tailwind (see below); the generated CSS is committed, so the site is servable straight from the repo.
+Sam Weldon's personal portfolio site (sam-weldon.com): React 19 + TypeScript, built by Vite, styled with Tailwind, deployed to GitHub Pages by Actions. Three routes — home, about, photos.
 
-## Running it
-
-Serve the repo root over HTTP (D3 and Alpine come from CDNs, so `file://` mostly works, but HTTP matches production):
+## Commands
 
 ```bash
-python3 -m http.server 8000   # then http://localhost:8000
+npm install        # or npm ci
+npm run dev        # Vite dev server with HMR
+npm run build      # typecheck, then bundle to dist/
+npm run check      # typecheck + smoke (what CI runs)
+npm run typecheck  # tsc --noEmit
+npm run smoke      # render every route in Node and assert its content
+npm run preview    # serve the built dist/ locally
+npm run logo       # regenerate the KaTeX site mark (rarely needed)
 ```
 
-## Deployment
+There is no unit-test framework. `npm run smoke` ([scripts/smoke.mjs](scripts/smoke.mjs)) is the safety net: it SSRs each route via [scripts/ssr-entry.tsx](scripts/ssr-entry.tsx) and fails if a page throws, a route stops matching, or expected content vanishes. Add a needle there when you add a page. It catches what `tsc` cannot, so run it after component changes.
 
-GitHub Pages serves the repo root of `main` directly; [CNAME](CNAME) maps it to sam-weldon.com. Pushing to `main` publishes. There is no CI.
+## Content lives in data, not markup
 
-## Styling / the Tailwind build
+The pages are thin. Everything you would normally want to edit is a typed array in [src/data/](src/data/):
 
-[pub/styles.css](pub/styles.css) is **generated output that is committed**, so GitHub Pages can serve the site with no build step. The source is [src/styles.css](src/styles.css). Edit the source, never the output:
+- [projects.ts](src/data/projects.ts) — the whole Projects section. `Project` is a discriminated union on `kind` (`embed` | `video` | `video-series` | `chart`); [ProjectCard.tsx](src/components/projects/ProjectCard.tsx) switches on it. **Adding a project is a data edit.** Adding a new *kind* of card means adding a union variant plus a case — TypeScript will point at the switch if you forget.
+- [photos.ts](src/data/photos.ts) — gallery tiles, images and videos.
+- [site.ts](src/data/site.ts) — nav items, social links, tagline, resume URL.
+- [coaches.ts](src/data/coaches.ts) — the ~36 rows behind the D3 chart, inlined deliberately so the graph needs no fetch.
 
-```bash
-npm install        # first time (or npm ci)
-npm run build      # src/styles.css -> pub/styles.css
-npm run watch      # same, rebuilding on change
-```
+Prefer extending the data and its types over hard-coding markup in a page.
 
-`tailwindcss` is pinned to **3.4.15** exactly, which is the version the committed stylesheet was originally built with; `npm ci && npm run build` reproduces it byte-for-byte. Don't float that pin to a newer 3.4.x without rebuilding and eyeballing the diff — 3.4.15 is where `rgb(... / var(--tw-text-opacity, 1))` fallbacks appear, so older versions produce different output.
+## Routing and GitHub Pages
 
-Commit `pub/styles.css` alongside any source change, or the live site won't pick it up.
+React Router with real paths (`/`, `/about`, `/photos`). Pages has no SPA rewrite, so two things make deep links work, and **both must survive any build change**:
 
-Hand-written component classes live in the `@layer components` block at the bottom of `src/styles.css`, not in the markup: `.Card` / `.Link` / `.clickedLink` (nav), `.graph-bar` / `.hovered` (D3 bars), `.project-card` / `.project-frame` (index.html cards), `.gallery-item` (photos.html thumbnails), plus a `.hidden` hover tweak and `[x-cloak]`. Prefer extending those over repeating long utility strings across ten elements.
+1. [vite.config.ts](vite.config.ts) copies `dist/index.html` to `dist/404.html` after the bundle. Pages serves 404.html for unknown paths, which boots the app and lets the router resolve the URL.
+2. `public/about.html` and `public/photos.html` are redirect stubs for the site's pre-React URLs. Don't delete them; old links and search results still point there.
 
-[tailwind.config.js](tailwind.config.js) defines the theme vocabulary: colors `deepBlue #010413`, `deeperBlue`, `coolOrange`, `myRed`, `deepRed`; fonts `Kanit` (body), `Outfit`, `SCPro`, `Oran`; spacing `400`/`480` (25rem/30rem, used by `.project-card`). Its `content` globs cover the three HTML pages and `src/js/**/*.js` — classes that only ever appear in JS string literals (`classList.add(...)`, D3's `.classed(...)`) are picked up from there, so keep new scripts under `src/js/`.
+`public/CNAME` carries the custom domain into `dist/` — losing it drops sam-weldon.com back to the github.io address.
 
-## Page structure
+Anchor links (`/#projects`, `/#contact`) only scroll natively on a full load, so [ScrollToHash.tsx](src/components/ScrollToHash.tsx) does it on client-side navigation.
 
-Three top-level pages — [index.html](index.html), [about.html](about.html), [photos.html](photos.html) — each with a **hand-duplicated header/nav block**. Nav or logo changes must be made in all three. The active page marks its own nav link with `class="clickedLink"` instead of `class="Link"`; sub-pages link back to `index.html#projects` / `index.html#contact`, while index.html uses bare `#projects` / `#contact`.
+Deploys run from [.github/workflows/deploy.yml](.github/workflows/deploy.yml) on push to `main`: `npm ci` → `npm run check` → `npm run build` → upload `dist/` → `actions/deploy-pages`. **This requires Settings → Pages → Source set to "GitHub Actions".** If that is ever switched back to a branch, deploys silently stop reaching the site.
 
-Every page loads KaTeX auto-render from a CDN — it exists to typeset the `\[ \overrightarrow{s}W\]` logo in the header. Each page's background container starts with a `<p aria-hidden="true">_</p>` spacer; it stops the first child's top margin from collapsing out of the background div. Don't "tidy" it away without checking the layout.
+## Styling
 
-`index.html` groups project cards into three `<section>`s (App / Data / School) inside a single `#projects` wrapper, all sharing the 400x480 `.project-card` box. The two App cards add `.project-frame` and embed *live sandboxed iframes* of other GitHub Pages apps.
+Tailwind, compiled by Vite through PostCSS. [src/index.css](src/index.css) is the only stylesheet; nothing generated is committed any more.
 
-[photos.html](photos.html) uses Alpine.js (pinned to `3.x.x` via jsDelivr) for the lightbox. The component is registered as `Alpine.data('imageGallery', ...)` in a `<script>` in `<head>` that must run before Alpine's deferred bundle. Only `<img>` tiles open in the lightbox — the `<video>` tile plays in place, and `step()` cycles over the images only.
+`tailwindcss` is pinned to **3.4.15**. Moving to v4 is a real migration, not a version bump: v4 drops the `bg-opacity-*` utilities this design uses on the header and video cards, renames the shadow scale, and replaces `tailwind.config.js` with CSS-first `@theme`. Do it as its own change, with a visual pass.
 
-## JavaScript
+Hand-written component classes live in the `@layer components` block of `src/index.css`: `.Card` / `.Link` / `.clickedLink` (nav), `.graph-bar` / `.hovered` (chart bars), `.project-card` / `.project-frame` (the fixed 400x480 cards), `.gallery-item` (photo tiles). Reach for these instead of repeating twenty-class strings across ten elements.
 
-[src/js/Coaches/graphs.js](src/js/Coaches/graphs.js) is the only script file — a classic (non-module) script loaded at the bottom of index.html; D3 v7 comes from a CDN in `<head>`. The ~250 lines of sentiment data are a `const coaches` array literal **inlined at the top of the file**; that is the data source, deliberately (a `fetch` would need a server). `chart()` renders into `#graph svg`, and hovering or tapping a bar rewrites the card's `<h4>`. `setUpInfoPanel()` swaps the graph for a write-up and back.
+[tailwind.config.js](tailwind.config.js) holds the theme vocabulary: `deepBlue #010413`, `deeperBlue`, `coolOrange`, `myRed`, `deepRed`; fonts `Kanit` (body), `Outfit`, `SCPro`, `Oran`; spacing `400`/`480` (25rem/30rem, used by `.project-card`). Its `content` globs are `index.html` and `src/**/*.{ts,tsx}` — a class assembled from string fragments at runtime won't be seen by the scanner and won't be emitted.
 
-All DOM selectors in this file are scoped to the coach-graphs card (`#graph rect`, `#coach-graphs h4`) — keep them that way, since index.html contains other `<h4>`s and other cards.
+## Two things that look odd but are deliberate
+
+**The site mark.** [src/components/logoMarkup.ts](src/components/logoMarkup.ts) is generated HTML, committed on purpose. KaTeX is ~260 kB of JavaScript and the logo is one constant formula, so [scripts/render-logo.mjs](scripts/render-logo.mjs) renders it at build time and only the KaTeX stylesheet ships. Regenerate with `npm run logo`; don't hand-edit the file.
+
+**The `_` spacer** in [Layout.tsx](src/components/Layout.tsx). Without it the first child's top margin collapses through the starfield container and the background starts too low. Pages with their own top padding pass `spacer={false}`.
+
+## The chart
+
+[CoachGraph.tsx](src/components/CoachGraph.tsx) draws SVG directly from `d3-scale` and `d3-array` — React owns the DOM, D3 only computes scales. There is no `d3-selection` or `d3-axis`; the y-axis ticks are rendered by hand to match what `axisLeft` produced. If you extend it, keep that split: no imperative D3 DOM mutation inside React.

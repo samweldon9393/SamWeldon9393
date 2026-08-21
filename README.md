@@ -8,23 +8,38 @@ This website acts as my **portfolio** — a place to:
 
 Live at [sam-weldon.com](https://sam-weldon.com).
 
+## Built with
+
+React 19 + TypeScript, bundled by Vite, styled with Tailwind CSS, deployed to
+GitHub Pages by a GitHub Actions workflow on every push to `main`.
+
 ## Running it locally
 
-Serve the repo root over HTTP and open it in a browser:
-
 ```bash
-npm run serve   # http://localhost:8000
+npm install
+npm run dev      # http://localhost:5173
 ```
 
-The compiled stylesheet is committed, so that is all you need to view the site.
-To change the styles, edit `src/styles.css` and recompile with Tailwind:
+Other commands:
 
 ```bash
-npm install     # first time
-npm run build   # or: npm run watch
+npm run build    # typecheck, then bundle to dist/
+npm run preview  # serve the built site
+npm run check    # typecheck + render every route (what CI runs)
 ```
 
-Commit the regenerated `pub/styles.css` along with your change.
+## Adding to the site
+
+Most updates are data edits, not markup:
+
+| To add a...            | Edit                  |
+| ---------------------- | --------------------- |
+| project card           | `src/data/projects.ts` |
+| photo or video tile    | `src/data/photos.ts`   |
+| nav or contact link    | `src/data/site.ts`     |
+
+A whole new page means a component in `src/pages/` and a `<Route>` in
+`src/App.tsx`.
 
 ## Projects
 
@@ -36,7 +51,7 @@ Commit the regenerated `pub/styles.css` along with your change.
 **Data**
 
 - Featured: [Reddit Hates Coaches](https://github.com/samweldon9393/Reddit-Hates-Coaches) —
-  built with **D3.js** to create an **interactive graph** that highlights the relationship
+  built with **D3** to create an **interactive graph** that highlights the relationship
   between comment volume and sentiment. My favorite piece is the bar graph, which makes
   that relationship visually clear.
 - Sing Sing Prison Museum animations
@@ -49,7 +64,7 @@ Commit the regenerated `pub/styles.css` along with your change.
 ## Sources
 
 - **Background image**: [Night Sky Texture by Mischiefidea](https://www.deviantart.com/mischiefidea/art/Textures-002-Night-Sky-180375638)
-- **Gallery code**: [TailwindFlex – Image Gallery](https://tailwindflex.com/@anonymous/image-gallery)
+- **Gallery design**: [TailwindFlex – Image Gallery](https://tailwindflex.com/@anonymous/image-gallery)
 
 ---
 

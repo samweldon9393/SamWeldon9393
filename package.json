@@ -1,14 +1,37 @@
 {
   "name": "sam-weldon-website",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
+  "type": "module",
   "description": "Personal portfolio site for sam-weldon.com",
   "scripts": {
-    "build": "tailwindcss -i ./src/styles.css -o ./pub/styles.css",
-    "watch": "tailwindcss -i ./src/styles.css -o ./pub/styles.css --watch",
-    "serve": "python3 -m http.server 8000"
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "logo": "node scripts/render-logo.mjs > src/components/logoMarkup.ts",
+    "smoke": "vite build --ssr scripts/ssr-entry.tsx --outDir .smoke --logLevel error && node scripts/smoke.mjs",
+    "check": "npm run typecheck && npm run smoke"
+  },
+  "dependencies": {
+    "d3-array": "^3.2.4",
+    "d3-scale": "^4.0.2",
+    "katex": "^0.16.47",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
-    "tailwindcss": "3.4.15"
+    "@types/d3-array": "^3.2.2",
+    "@types/d3-scale": "^4.0.9",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.1.0",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.26",
+    "tailwindcss": "3.4.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.2"
   }
 }
