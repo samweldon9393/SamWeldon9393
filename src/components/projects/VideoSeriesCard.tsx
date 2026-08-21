@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { VideoSeriesProject } from '../../data/projects';
-import { CARD_CLASS } from './cardClass';
+import CardShell from './CardShell';
 
 export default function VideoSeriesCard({ project }: { project: VideoSeriesProject }) {
   const [index, setIndex] = useState(0);
@@ -11,37 +11,51 @@ export default function VideoSeriesCard({ project }: { project: VideoSeriesProje
   }
 
   return (
-    <div id={project.id} className={`${CARD_CLASS} bg-black bg-opacity-50`}>
-      <h4 className="mb-1 mt-1 text-center">{project.title}</h4>
+    <CardShell
+      id={project.id}
+      title={project.title}
+      blurb={project.blurb}
+      media={
+        <>
+          {/* Keying on the source swaps the element rather than mutating src,
+              which is what actually reloads the clip. */}
+          <video
+            key={project.sources[index]}
+            controls
+            preload="metadata"
+            src={project.sources[index]}
+            className="absolute inset-0 h-full w-full bg-black object-contain"
+          />
 
-      <div className="relative mt-4 flex items-center justify-center">
-        <button
-          type="button"
-          aria-label="Previous video"
-          onClick={() => step(-1)}
-          className="absolute left-2 rounded-full bg-black/50 px-2 py-1 text-2xl hover:bg-white"
-        >
-          &lsaquo;
-        </button>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between p-3">
+            <button
+              type="button"
+              aria-label="Previous clip"
+              onClick={() => step(-1)}
+              className="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-full
+                         border border-white/20 bg-ink/70 text-sm backdrop-blur transition
+                         hover:border-white/40 hover:bg-ink"
+            >
+              &lsaquo;
+            </button>
 
-        {/* Keying on the source makes React swap the element instead of
-            mutating src, which is what actually reloads the clip. */}
-        <video
-          key={project.sources[index]}
-          controls
-          className="pt-20 opacity-90 transition"
-          src={project.sources[index]}
-        />
+            <span className="pointer-events-none rounded-full bg-ink/70 px-2.5 py-1 font-mono text-[10px] text-muted backdrop-blur">
+              {index + 1} / {count}
+            </span>
 
-        <button
-          type="button"
-          aria-label="Next video"
-          onClick={() => step(1)}
-          className="absolute right-2 rounded-full bg-black/50 px-2 py-1 text-2xl hover:bg-black"
-        >
-          &rsaquo;
-        </button>
-      </div>
-    </div>
+            <button
+              type="button"
+              aria-label="Next clip"
+              onClick={() => step(1)}
+              className="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-full
+                         border border-white/20 bg-ink/70 text-sm backdrop-blur transition
+                         hover:border-white/40 hover:bg-ink"
+            >
+              &rsaquo;
+            </button>
+          </div>
+        </>
+      }
+    />
   );
 }

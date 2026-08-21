@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { gallery } from '../data/photos';
 import Lightbox from './Lightbox';
+import Reveal from './Reveal';
 
 /* Only images open in the lightbox; video tiles play in place. */
 const images = gallery.flatMap((item) => (item.kind === 'image' ? [item] : []));
@@ -19,28 +20,47 @@ export default function PhotoGallery() {
 
   return (
     <>
-      <div className="mx-auto max-w-6xl select-none">
-        <ul className="grid grid-cols-2 gap-5 lg:grid-cols-5">
-          {gallery.map((item) =>
-            item.kind === 'image' ? (
-              <li key={item.src}>
-                <img
-                  className="gallery-item"
-                  src={item.src}
-                  alt={item.alt}
-                  onClick={() => setOpenIndex(images.indexOf(item))}
-                />
-              </li>
-            ) : (
-              <li key={item.src}>
-                <video className="gallery-item" controls src={item.src} aria-label={item.label} />
-              </li>
-            ),
-          )}
-        </ul>
+      {/*
+        A CSS column layout keeps every photo at its own aspect ratio rather than
+        cropping them all to one shape, which suits a personal gallery.
+      */}
+      <div className="columns-2 gap-4 md:columns-3 lg:columns-4 [&>*]:mb-4">
+        {gallery.map((item, index) =>
+          item.kind === 'image' ? (
+            <Reveal key={item.src} delay={Math.min(index, 6) * 60} className="break-inside-avoid">
+              <button
+                type="button"
+                className="block w-full"
+                onClick={() => setOpenIndex(images.indexOf(item))}
+                aria-label={`Open photo: ${item.alt}`}
+              >
+                <img className="tile" src={item.src} alt={item.alt} loading="lazy" />
+              </button>
+            </Reveal>
+          ) : (
+            <Reveal key={item.src} delay={Math.min(index, 6) * 60} className="break-inside-avoid">
+              <video
+                className="w-full rounded-xl border border-white/10 bg-white/5"
+                controls
+                preload="metadata"
+                src={item.src}
+                aria-label={item.label}
+              />
+            </Reveal>
+          ),
+        )}
       </div>
 
-      {open && <Lightbox src={open.src} alt={open.alt} onClose={close} onStep={step} />}
+      {open && (
+        <Lightbox
+          src={open.src}
+          alt={open.alt}
+          index={openIndex ?? 0}
+          total={images.length}
+          onClose={close}
+          onStep={step}
+        />
+      )}
     </>
   );
 }

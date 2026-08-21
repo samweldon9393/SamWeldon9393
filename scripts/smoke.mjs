@@ -18,20 +18,19 @@ const ROUTES = {
     'Reddit Hates Coaches',
     'MyMake',
     'Webserver',
-    'senior at Columbia',
-    'id="projects"',
+    'Columbia University',
+    'id="work"',
     'id="contact"',
-    'graph-bar',
-    'project-frame',
     '/images/mymake2.mp4',
     'Resume.pdf',
+    'Selected work',
   ],
-  '/about': ['Hi, I', 'Winnie', '/images/Me2.JPG', 'Housatonic'],
-  '/photos': ['gallery-item', '/images/Seafood.jpg', '/images/Video.mov'],
+  '/about': ['Winnie', '/images/Me2.JPG', 'Housatonic'],
+  '/photos': ['/images/Seafood.jpg', '/images/Video.mov', 'Friends, family'],
   '/no-such-page': ['Page not found'],
 };
 
-/** Home has no nav entry of its own; sub-pages mark exactly one link current. */
+/** Home's nav entries are all hash links, so no page link is marked current. */
 const EXPECTED_CURRENT = { '/': 0, '/about': 1, '/photos': 1 };
 
 let failures = 0;
@@ -56,11 +55,18 @@ for (const [url, needles] of Object.entries(ROUTES)) {
 }
 
 for (const [url, expected] of Object.entries(EXPECTED_CURRENT)) {
-  const found = (render(url).match(/clickedLink/g) ?? []).length;
+  const found = (render(url).match(/nav-link-active/g) ?? []).length;
   if (found !== expected) fail(`${url} marks ${found} nav links current, expected ${expected}`);
 }
 
-const rects = (render('/').match(/<rect/g) ?? []).length;
+const homeHtml = render('/');
+if (homeHtml.includes('<title')) {
+  fail('a <title> element rendered into the body - React 19 hoists these as page metadata');
+} else {
+  console.log('  ok    no stray <title> in the rendered body');
+}
+
+const rects = homeHtml.match(/<rect/g)?.length ?? 0;
 if (rects !== 72) fail(`coach graph drew ${rects} bars, expected 72 (36 coaches x 2)`);
 else console.log('  ok    coach graph drew 72 bars');
 

@@ -4,15 +4,55 @@ import { createPortal } from 'react-dom';
 type Props = {
   src: string;
   alt: string;
+  index: number;
+  total: number;
   onClose: () => void;
   onStep: (offset: number) => void;
 };
 
+function ArrowButton({
+  side,
+  label,
+  onClick,
+}: {
+  side: 'left' | 'right';
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      onClick={(event) => {
+        event.stopPropagation();
+        onClick();
+      }}
+      className={`absolute top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center
+                  rounded-full border border-white/15 bg-ink/60 text-white backdrop-blur
+                  transition duration-200 ease-soft hover:border-white/40 hover:bg-ink
+                  ${side === 'left' ? 'left-4 sm:left-8' : 'right-4 sm:right-8'}`}
+    >
+      <svg
+        className="h-5 w-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d={side === 'left' ? 'M15.75 19.5L8.25 12l7.5-7.5' : 'M8.25 4.5l7.5 7.5-7.5 7.5'} />
+      </svg>
+    </button>
+  );
+}
+
 /**
  * Rendered into document.body so the overlay is never trapped by an ancestor's
- * stacking or overflow context.
+ * stacking or overflow context. Page scrolling is locked while it is open.
  */
-export default function Lightbox({ src, alt, onClose, onStep }: Props) {
+export default function Lightbox({ src, alt, index, total, onClose, onStep }: Props) {
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') onClose();
@@ -20,74 +60,62 @@ export default function Lightbox({ src, alt, onClose, onStep }: Props) {
       if (event.key === 'ArrowLeft') onStep(-1);
     }
 
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+    };
   }, [onClose, onStep]);
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[99] flex cursor-zoom-out select-none items-center justify-center
-                 bg-black bg-opacity-50"
+      className="fixed inset-0 z-[100] flex animate-fade-up cursor-zoom-out items-center
+                 justify-center bg-ink/90 p-4 backdrop-blur-md sm:p-10"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Photo viewer"
     >
-      <div className="relative flex w-11/12 items-center justify-center xl:w-4/5">
-        <button
-          type="button"
-          aria-label="Previous photo"
-          onClick={(event) => {
-            event.stopPropagation();
-            onStep(-1);
-          }}
-          className="absolute left-0 flex h-14 w-14 translate-x-10 cursor-pointer items-center
-                     justify-center rounded-full bg-white/10 text-white hover:bg-white/20
-                     xl:-translate-x-24 2xl:-translate-x-32"
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close"
+        className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full
+                   border border-white/15 text-white transition hover:border-white/40 sm:right-8 sm:top-8"
+      >
+        <svg
+          className="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          aria-hidden="true"
         >
-          <svg
-            className="h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-          </svg>
-        </button>
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
 
+      <ArrowButton side="left" label="Previous photo" onClick={() => onStep(-1)} />
+
+      <figure className="m-0 flex max-h-full max-w-5xl flex-col items-center" onClick={(e) => e.stopPropagation()}>
         <img
-          className="max-w-xl cursor-zoom-out select-none object-scale-down object-center"
+          className="max-h-[75vh] w-auto rounded-xl border border-white/10 object-contain"
           src={src}
           alt={alt}
         />
+        <figcaption className="mt-4 flex items-center gap-4 font-mono text-xs text-muted">
+          <span>{alt}</span>
+          <span className="text-muted/60">
+            {index + 1} / {total}
+          </span>
+        </figcaption>
+      </figure>
 
-        <button
-          type="button"
-          aria-label="Next photo"
-          onClick={(event) => {
-            event.stopPropagation();
-            onStep(1);
-          }}
-          className="absolute right-0 flex h-14 w-14 -translate-x-10 cursor-pointer items-center
-                     justify-center rounded-full bg-white/10 text-white hover:bg-white/20
-                     xl:translate-x-24 2xl:translate-x-32"
-        >
-          <svg
-            className="h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-          </svg>
-        </button>
-      </div>
+      <ArrowButton side="right" label="Next photo" onClick={() => onStep(1)} />
     </div>,
     document.body,
   );

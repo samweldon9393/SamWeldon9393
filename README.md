@@ -13,6 +13,11 @@ Live at [sam-weldon.com](https://sam-weldon.com).
 React 19 + TypeScript, bundled by Vite, styled with Tailwind CSS, deployed to
 GitHub Pages by a GitHub Actions workflow on every push to `main`.
 
+The design is a dark theme with a single warm accent, Outfit for headings and
+Inter for body text. Shared styles (buttons, cards, headings, the page
+container) live as component classes in `src/index.css` — reach for those
+instead of repeating long utility strings.
+
 ## Running it locally
 
 ```bash
@@ -35,8 +40,10 @@ Most updates are data edits, not markup:
 | To add a...            | Edit                  |
 | ---------------------- | --------------------- |
 | project card           | `src/data/projects.ts` |
+| project blurb or title | `src/data/projects.ts` |
 | photo or video tile    | `src/data/photos.ts`   |
 | nav or contact link    | `src/data/site.ts`     |
+| hero tagline or intro  | `src/data/site.ts`     |
 
 A whole new page means a component in `src/pages/` and a `<Route>` in
 `src/App.tsx`.

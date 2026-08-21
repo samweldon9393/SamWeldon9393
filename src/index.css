@@ -1,62 +1,145 @@
 /*
- * Global stylesheet. Vite compiles this with Tailwind; there is no committed
- * build output any more.
+ * Global stylesheet. Vite compiles this with Tailwind.
+ *
+ * The design is a dark, near-black surface with one warm accent. Anything used
+ * on more than a couple of elements belongs in @layer components below rather
+ * than as a repeated string of utilities in JSX.
  */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* The sticky header would otherwise cover anchored section headings. */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-ink text-white antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+
+  /* One visible, consistent focus ring instead of the browser default. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent/70 ring-offset-2 ring-offset-ink;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-ink;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full border-2 border-ink bg-white/15;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/25;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
 @layer components {
-  /* Nav items in the header of every page. */
-  .Card {
-    @apply flex;
+  /* Page gutter and measure, shared by every section. */
+  .container-page {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8 lg:px-12;
   }
 
-  .Link {
-    @apply mt-6 inline-flex items-center px-1 text-base opacity-80 transition
-           hover:text-white focus:opacity-100;
+  /* Small mono label that sits above a heading. */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-accent;
   }
 
-  /* The nav link for the page you are already on. */
-  .clickedLink {
-    @apply mt-6 inline-flex items-center px-1 text-base text-white opacity-80 transition;
+  .heading-xl {
+    @apply font-display text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl;
   }
 
-  /* Bars of the Reddit Hates Coaches graph, drawn by src/js/Coaches/graphs.js.
-     .hovered is toggled on the bar under the cursor. */
-  .graph-bar {
-    @apply rounded-2xl shadow-xl;
+  .heading-lg {
+    @apply font-display text-3xl font-medium tracking-tight sm:text-4xl;
   }
 
-  .hovered {
-    @apply hover:fill-slate-100 hover:opacity-90 active:fill-slate-100 active:opacity-90;
+  .heading-md {
+    @apply font-display text-xl font-medium tracking-tight;
   }
 
-  /* Project cards on the home page: a fixed 400x480 box (w-400/h-480 come from the
-     custom spacing scale in tailwind.config.js). */
-  .project-card {
-    @apply relative w-400 h-480;
+  .body-muted {
+    @apply text-muted leading-relaxed;
   }
 
-  /* Cards that embed a live site: clip the iframe to the card. */
-  .project-frame {
-    @apply overflow-hidden;
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm
+           font-medium transition duration-200 ease-soft;
   }
 
-  .project-frame h4 {
-    @apply m-0 py-1 text-center;
-    font-size: 0.9rem;
-    line-height: 1.25rem;
+  .btn-primary {
+    @apply btn bg-accent text-ink hover:bg-accentSoft;
   }
 
-  .project-frame iframe {
-    @apply block w-full border-0;
-    height: calc(100% - 2rem); /* leaves room for the title */
+  .btn-ghost {
+    @apply btn border border-white/15 text-white hover:border-white/30 hover:bg-white/5;
   }
 
-  /* Thumbnails in the photos gallery. */
-  .gallery-item {
-    @apply object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in
-           aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4];
+  /*
+   * Surface panel. The border is what reads as "card" here, not a shadow -
+   * shadows are close to invisible on a near-black background.
+   */
+  .card {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-surface
+           transition duration-300 ease-soft;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:border-white/20 hover:bg-surfaceHi;
+  }
+
+  /* Nav */
+  .nav-link {
+    @apply relative py-1 text-sm text-muted transition-colors duration-200 hover:text-white;
+  }
+
+  .nav-link-active {
+    @apply text-white;
+  }
+
+  /* Underline that grows from the left on hover, and stays put when current. */
+  .nav-link::after {
+    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-all duration-300 ease-soft;
+    content: '';
+  }
+
+  .nav-link:hover::after,
+  .nav-link-active::after {
+    @apply w-full;
+  }
+
+  /* Photo tiles */
+  .tile {
+    @apply block w-full cursor-zoom-in overflow-hidden rounded-xl border border-white/10
+           bg-white/5 object-cover transition duration-500 ease-soft hover:scale-[1.02]
+           hover:border-white/25;
   }
 }

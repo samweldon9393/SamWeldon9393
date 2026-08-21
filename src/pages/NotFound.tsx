@@ -7,15 +7,18 @@ export default function NotFound() {
 
   return (
     <Layout>
-      <div className="mx-auto max-w-xl px-4 py-40 text-center">
-        <h1 className="mb-4 text-3xl">Page not found</h1>
-        <p className="mb-8 text-sm">
-          That page doesn't exist. It may have moved when the site was rebuilt.
-        </p>
-        <Link className="Link underline" to="/">
-          Back home
-        </Link>
-      </div>
+      <section className="flex min-h-[60vh] items-center py-20">
+        <div className="container-page text-center">
+          <p className="eyebrow">404</p>
+          <h1 className="heading-lg mt-4">Page not found</h1>
+          <p className="body-muted mx-auto mt-4 max-w-prose">
+            That page doesn&rsquo;t exist. It may have moved when the site was rebuilt.
+          </p>
+          <Link className="btn-primary mt-8" to="/">
+            Back home
+          </Link>
+        </div>
+      </section>
     </Layout>
   );
 }

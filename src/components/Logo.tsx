@@ -10,8 +10,9 @@ export default function Logo() {
     <span
       role="img"
       aria-label="Sam Weldon"
-      className="flex-shrink-0 items-center text-2xl text-blue-200 opacity-90 transition-transform
-                 duration-500 hover:rotate-180 hover:text-white"
+      className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15
+                 bg-white/5 text-sm leading-none text-white transition duration-300 ease-soft
+                 hover:border-accent/60 hover:text-accent"
       dangerouslySetInnerHTML={{ __html: LOGO_HTML }}
     />
   );
