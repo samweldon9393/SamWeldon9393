@@ -1,0 +1,77 @@
+/*
+ * Generated from src/styles.css by Tailwind CSS - do not edit directly.
+ * Rebuild with: npm run build
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oranienbaum&family=Outfit:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Nav items in the header of every page. */
+  .Card {
+    @apply flex;
+  }
+
+  .Link {
+    @apply mt-6 inline-flex items-center px-1 text-base opacity-80 transition
+           hover:text-white focus:opacity-100;
+  }
+
+  /* The nav link for the page you are already on. */
+  .clickedLink {
+    @apply mt-6 inline-flex items-center px-1 text-base text-white opacity-80 transition;
+  }
+
+  /* Bars of the Reddit Hates Coaches graph, drawn by src/js/Coaches/graphs.js.
+     .hovered is toggled on the bar under the cursor. */
+  .graph-bar {
+    @apply rounded-2xl shadow-xl;
+  }
+
+  .hovered {
+    @apply hover:fill-slate-100 hover:opacity-90 active:fill-slate-100 active:opacity-90;
+  }
+
+  /* Dims the Winnie photo on about.html, which stays tagged .hidden while
+     group-hover reveals it. */
+  .hidden {
+    @apply hover:opacity-50;
+  }
+
+  /* Project cards on index.html: a fixed 400x480 box (w-400/h-480 come from the
+     custom spacing scale in tailwind.config.js). */
+  .project-card {
+    @apply relative w-400 h-480;
+  }
+
+  /* Cards that embed a live site: clip the iframe to the card. */
+  .project-frame {
+    @apply overflow-hidden;
+  }
+
+  .project-frame h4 {
+    @apply m-0 py-1 text-center;
+    font-size: 0.9rem;
+    line-height: 1.25rem;
+  }
+
+  .project-frame iframe {
+    @apply block w-full border-0;
+    height: calc(100% - 2rem); /* leaves room for the title */
+  }
+
+  /* Thumbnails in the photos.html gallery. */
+  .gallery-item {
+    @apply object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in
+           aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4];
+  }
+}
+
+/* Hides Alpine markup until Alpine has initialised. Outside @layer so it is
+   always emitted, since it is not keyed to a class name. */
+[x-cloak] {
+  display: none !important;
+}

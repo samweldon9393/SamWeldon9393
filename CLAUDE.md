@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Sam Weldon's personal portfolio site (sam-weldon.com). A hand-written static site — three HTML pages, one stylesheet, one JS file. No framework, no bundler, no package.json, no tests, no linter.
+Sam Weldon's personal portfolio site (sam-weldon.com). A hand-written static site — three HTML pages, one stylesheet, one JS file. No framework, no bundler, no tests, no linter. The only build step is Tailwind (see below); the generated CSS is committed, so the site is servable straight from the repo.
 
 ## Running it
 
@@ -18,18 +18,23 @@ python3 -m http.server 8000   # then http://localhost:8000
 
 GitHub Pages serves the repo root of `main` directly; [CNAME](CNAME) maps it to sam-weldon.com. Pushing to `main` publishes. There is no CI.
 
-## The Tailwind situation (most important gotcha)
+## Styling / the Tailwind build
 
-[pub/styles.css](pub/styles.css) is **committed compiled Tailwind v3 output**, and the build inputs are not in the repo — no `package.json`, no `src/styles.css` with the `@tailwind` / `@layer components` source. Only [tailwind.config.js](tailwind.config.js) survives.
+[pub/styles.css](pub/styles.css) is **generated output that is committed**, so GitHub Pages can serve the site with no build step. The source is [src/styles.css](src/styles.css). Edit the source, never the output:
 
-Consequences:
+```bash
+npm install        # first time (or npm ci)
+npm run build      # src/styles.css -> pub/styles.css
+npm run watch      # same, rebuilding on change
+```
 
-- Adding a Tailwind utility class to an HTML file does nothing unless that exact class already appears in `pub/styles.css`. Grep before you use one: `grep -n '^\.md\\:my-2{' pub/styles.css`.
-- The hand-authored component classes — `.Card`, `.Link`, `.clickedLink`, `.graph-bar`, `.hovered` (near the end of the file) — exist only as compiled rules. Their `@apply` source is gone.
-- For a small change, hand-editing `pub/styles.css` is the pragmatic move. To regenerate properly you must first recreate `src/styles.css` and a Tailwind v3 toolchain, then `npx tailwindcss -i src/styles.css -o pub/styles.css`, and check that the component classes survive.
-- `tailwind.config.js` defines the theme vocabulary: colors `deepBlue #010413`, `deeperBlue`, `coolOrange`, `myRed`, `deepRed`; fonts `Kanit` (body), `Outfit`, `SCPro`, `Oran`; spacing `400`/`480` (25rem/30rem).
+`tailwindcss` is pinned to **3.4.15** exactly, which is the version the committed stylesheet was originally built with; `npm ci && npm run build` reproduces it byte-for-byte. Don't float that pin to a newer 3.4.x without rebuilding and eyeballing the diff — 3.4.15 is where `rgb(... / var(--tw-text-opacity, 1))` fallbacks appear, so older versions produce different output.
 
-Because of this, page-specific layout that Tailwind can't supply is written as plain CSS in a `<style>` block in the page that needs it: `.project-card` / `.project-frame` in [index.html](index.html), `.gallery-item` and `[x-cloak]` in [photos.html](photos.html). Prefer extending those over inventing utility classes that won't exist.
+Commit `pub/styles.css` alongside any source change, or the live site won't pick it up.
+
+Hand-written component classes live in the `@layer components` block at the bottom of `src/styles.css`, not in the markup: `.Card` / `.Link` / `.clickedLink` (nav), `.graph-bar` / `.hovered` (D3 bars), `.project-card` / `.project-frame` (index.html cards), `.gallery-item` (photos.html thumbnails), plus a `.hidden` hover tweak and `[x-cloak]`. Prefer extending those over repeating long utility strings across ten elements.
+
+[tailwind.config.js](tailwind.config.js) defines the theme vocabulary: colors `deepBlue #010413`, `deeperBlue`, `coolOrange`, `myRed`, `deepRed`; fonts `Kanit` (body), `Outfit`, `SCPro`, `Oran`; spacing `400`/`480` (25rem/30rem, used by `.project-card`). Its `content` globs cover the three HTML pages and `src/js/**/*.js` — classes that only ever appear in JS string literals (`classList.add(...)`, D3's `.classed(...)`) are picked up from there, so keep new scripts under `src/js/`.
 
 ## Page structure
 

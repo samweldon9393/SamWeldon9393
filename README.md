@@ -10,12 +10,21 @@ Live at [sam-weldon.com](https://sam-weldon.com).
 
 ## Running it locally
 
-The site is plain HTML, CSS, and JavaScript — there is nothing to build. Serve
-the repo root over HTTP and open it in a browser:
+Serve the repo root over HTTP and open it in a browser:
 
 ```bash
-python3 -m http.server 8000   # http://localhost:8000
+npm run serve   # http://localhost:8000
 ```
+
+The compiled stylesheet is committed, so that is all you need to view the site.
+To change the styles, edit `src/styles.css` and recompile with Tailwind:
+
+```bash
+npm install     # first time
+npm run build   # or: npm run watch
+```
+
+Commit the regenerated `pub/styles.css` along with your change.
 
 ## Projects
 

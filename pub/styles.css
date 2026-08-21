@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oranienbaum&family=Outfit:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
+/*
+ * Generated from src/styles.css by Tailwind CSS - do not edit directly.
+ * Rebuild with: npm run build
+ */
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -109,8 +114,8 @@
 }
 
 /*
-! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com
-*/
+ ! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com
+ */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -590,8 +595,143 @@ video {
   }
 }
 
-.static{
-  position: static;
+/* Nav items in the header of every page. */
+
+.Card{
+  display: flex;
+}
+
+.Link{
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  opacity: 0.8;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.Link:hover{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.Link:focus{
+  opacity: 1;
+}
+
+/* The nav link for the page you are already on. */
+
+.clickedLink{
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+  opacity: 0.8;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Bars of the Reddit Hates Coaches graph, drawn by src/js/Coaches/graphs.js.
+     .hovered is toggled on the bar under the cursor. */
+
+.graph-bar{
+  border-radius: 1rem;
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.hovered:hover{
+  fill: #f1f5f9;
+  opacity: 0.9;
+}
+
+.hovered:active{
+  fill: #f1f5f9;
+  opacity: 0.9;
+}
+
+/* Dims the Winnie photo on about.html, which stays tagged .hidden while
+     group-hover reveals it. */
+
+.hidden:hover{
+  opacity: 0.5;
+}
+
+/* Project cards on index.html: a fixed 400x480 box (w-400/h-480 come from the
+     custom spacing scale in tailwind.config.js). */
+
+.project-card{
+  position: relative;
+  height: 30rem;
+  width: 25rem;
+}
+
+/* Cards that embed a live site: clip the iframe to the card. */
+
+.project-frame{
+  overflow: hidden;
+}
+
+.project-frame h4{
+  margin: 0px;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+}
+
+.project-frame iframe{
+  display: block;
+  width: 100%;
+  border-width: 0px;
+  height: calc(100% - 2rem);
+  /* leaves room for the title */
+}
+
+/* Thumbnails in the photos.html gallery. */
+
+.gallery-item{
+  aspect-ratio: 5/6;
+  height: auto;
+  width: 100%;
+  cursor: zoom-in;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (min-width: 1024px){
+  .gallery-item{
+    aspect-ratio: 2/3;
+  }
+}
+
+@media (min-width: 1280px){
+  .gallery-item{
+    aspect-ratio: 3/4;
+  }
 }
 
 .fixed{
@@ -630,11 +770,6 @@ video {
   z-index: 99;
 }
 
-.mx-0{
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
 .mx-1{
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -653,11 +788,6 @@ video {
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
-}
-
-.my-2{
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .my-4{
@@ -713,10 +843,6 @@ video {
   margin-top: 2rem;
 }
 
-.block{
-  display: block;
-}
-
 .flex{
   display: flex;
 }
@@ -729,16 +855,8 @@ video {
   display: none;
 }
 
-.aspect-\[5\/6\]{
-  aspect-ratio: 5/6;
-}
-
 .h-14{
   height: 3.5rem;
-}
-
-.h-480{
-  height: 30rem;
 }
 
 .h-6{
@@ -749,24 +867,8 @@ video {
   height: 24rem;
 }
 
-.h-\[480px\]{
-  height: 480px;
-}
-
-.h-\[800px\]{
-  height: 800px;
-}
-
-.h-auto{
-  height: auto;
-}
-
 .h-full{
   height: 100%;
-}
-
-.h-screen{
-  height: 100vh;
 }
 
 .max-h-10{
@@ -785,10 +887,6 @@ video {
   max-height: 24rem;
 }
 
-.min-h-16{
-  min-height: 4rem;
-}
-
 .min-h-60{
   min-height: 15rem;
 }
@@ -801,24 +899,12 @@ video {
   width: 3.5rem;
 }
 
-.w-400{
-  width: 25rem;
-}
-
 .w-6{
   width: 1.5rem;
 }
 
 .w-96{
   width: 24rem;
-}
-
-.w-\[1200px\]{
-  width: 1200px;
-}
-
-.w-\[400px\]{
-  width: 400px;
 }
 
 .w-full{
@@ -873,10 +959,6 @@ video {
   flex-shrink: 0;
 }
 
-.origin-top-left{
-  transform-origin: top left;
-}
-
 .-translate-x-10{
   --tw-translate-x: -2.5rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -893,22 +975,12 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.scale-\[0\.33\]{
-  --tw-scale-x: 0.33;
-  --tw-scale-y: 0.33;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .cursor-pointer{
   cursor: pointer;
-}
-
-.cursor-zoom-in{
-  cursor: zoom-in;
 }
 
 .cursor-zoom-out{
@@ -969,10 +1041,6 @@ video {
   margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.overflow-hidden{
-  overflow: hidden;
-}
-
 .rounded{
   border-radius: 0.25rem;
 }
@@ -983,22 +1051,6 @@ video {
 
 .rounded-md{
   border-radius: 0.375rem;
-}
-
-.rounded-xl{
-  border-radius: 0.75rem;
-}
-
-.border{
-  border-width: 1px;
-}
-
-.border-dotted{
-  border-style: dotted;
-}
-
-.border-none{
-  border-style: none;
 }
 
 .bg-black{
@@ -1015,16 +1067,6 @@ video {
   background-color: rgb(1 4 19 / var(--tw-bg-opacity, 1));
 }
 
-.bg-gray-200{
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
-}
-
-.bg-indigo-900{
-  --tw-bg-opacity: 1;
-  background-color: rgb(49 46 129 / var(--tw-bg-opacity, 1));
-}
-
 .bg-white\/10{
   background-color: rgb(255 255 255 / 0.1);
 }
@@ -1037,30 +1079,12 @@ video {
   background-size: 800px 600px;
 }
 
-.bg-cover{
-  background-size: cover;
-}
-
 .bg-fixed{
   background-attachment: fixed;
 }
 
-.bg-center{
-  background-position: center;
-}
-
 .bg-no-repeat{
   background-repeat: no-repeat;
-}
-
-.object-cover{
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.object-fill{
-  -o-object-fit: fill;
-     object-fit: fill;
 }
 
 .object-scale-down{
@@ -1091,11 +1115,6 @@ video {
 .py-16{
   padding-top: 4rem;
   padding-bottom: 4rem;
-}
-
-.py-2{
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 .pb-10{
@@ -1142,10 +1161,6 @@ video {
   font-family: Source Code Pro;
 }
 
-.font-mono{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
 .font-sans{
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -1171,11 +1186,6 @@ video {
 
 .leading-snug{
   line-height: 1.375;
-}
-
-.text-black{
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
 .text-blue-100{
@@ -1257,14 +1267,6 @@ video {
   transition-duration: 150ms;
 }
 
-.delay-300{
-  transition-delay: 300ms;
-}
-
-.duration-1000{
-  transition-duration: 1000ms;
-}
-
 .duration-300{
   transition-duration: 300ms;
 }
@@ -1277,73 +1279,11 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.Card{
-  display: flex;
-}
+/* Hides Alpine markup until Alpine has initialised. Outside @layer so it is
+   always emitted, since it is not keyed to a class name. */
 
-.Link{
-  margin-top: 1.5rem;
-  display: inline-flex;
-  align-items: center;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  opacity: 0.8;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.Link:hover{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.Link:focus{
-  opacity: 1;
-}
-
-.clickedLink{
-  margin-top: 1.5rem;
-  display: inline-flex;
-  align-items: center;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-  opacity: 0.8;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-
-.hovered:hover{
-  fill: #f1f5f9;
-  opacity: 0.9;
-}
-
-.hovered:active{
-  fill: #f1f5f9;
-  opacity: 0.9;
-}
-
-.hidden:hover{
-  opacity: 0.5;
-}
-
-.graph-bar{
-  border-radius: 1rem;
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+[x-cloak] {
+  display: none !important;
 }
 
 .hover\:rotate-180:hover{
@@ -1382,10 +1322,6 @@ video {
 
 .group:hover .group-hover\:flex{
   display: flex;
-}
-
-.group:hover .group-hover\:opacity-100{
-  opacity: 1;
 }
 
 @media (min-width: 640px){
@@ -1437,11 +1373,6 @@ video {
 }
 
 @media (min-width: 768px){
-  .md\:my-0{
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-
   .md\:my-2{
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -1482,10 +1413,6 @@ video {
     margin-bottom: 2.5rem;
   }
 
-  .lg\:aspect-\[2\/3\]{
-    aspect-ratio: 2/3;
-  }
-
   .lg\:grid-cols-5{
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
@@ -1521,10 +1448,6 @@ video {
   .xl\:my-48{
     margin-top: 12rem;
     margin-bottom: 12rem;
-  }
-
-  .xl\:aspect-\[3\/4\]{
-    aspect-ratio: 3/4;
   }
 
   .xl\:w-4\/5{

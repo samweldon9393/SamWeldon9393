@@ -13,36 +13,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
             onload="renderMathInElement(document.body);"></script>
-
-    <!-- Project cards are a fixed 400x480 box. Tailwind's build output is committed
-         rather than generated, so card-specific rules live here as plain CSS. -->
-    <style>
-      .project-card {
-        position: relative;
-        width: 400px;
-        height: 480px;
-      }
-
-      /* Cards that embed a live site: clip the iframe to the card. */
-      .project-frame {
-        overflow: hidden;
-      }
-
-      .project-frame h4 {
-        margin: 0;
-        padding: 0.25rem 0;
-        text-align: center;
-        font-size: 0.9rem;
-        line-height: 1.25rem;
-      }
-
-      .project-frame iframe {
-        display: block;
-        width: 100%;
-        height: calc(100% - 2rem); /* leaves room for the title */
-        border: 0;
-      }
-    </style>
   </head>
 
   <body class="text-blue-100 bg-deepBlue font-Kanit">
