@@ -28,6 +28,22 @@ export type VideoSeriesProject = ProjectBase & {
   sources: string[];
 };
 
+/** A published piece, linked out to wherever it lives. */
+export type WritingProject = ProjectBase & {
+  kind: 'writing';
+  /** Drives the call to action: "Read the post" vs "Read the paper". */
+  form: 'post' | 'paper';
+  url: string;
+  /** Where it was published, shown as the card's eyebrow. */
+  publication: string;
+  /** ISO date; formatted for display by the card. */
+  date: string;
+  /** Every author, in published order, including Sam - the card highlights him. */
+  authors: string[];
+  /** Optional citation line, e.g. an arXiv identifier. */
+  identifier?: string;
+};
+
 /** The D3 sentiment chart, which renders its own component. */
 export type ChartProject = ProjectBase & {
   kind: 'chart';
@@ -36,7 +52,17 @@ export type ChartProject = ProjectBase & {
   description: string;
 };
 
-export type Project = EmbedProject | VideoProject | VideoSeriesProject | ChartProject;
+export type Project =
+  | EmbedProject
+  | VideoProject
+  | VideoSeriesProject
+  | ChartProject
+  | WritingProject;
+
+/** Kinds that are given the full width of the grid rather than one column. */
+export function isWideProject(project: Project) {
+  return project.kind === 'chart' || project.kind === 'writing';
+}
 
 export type ProjectSection = {
   id: string;
@@ -45,6 +71,48 @@ export type ProjectSection = {
 };
 
 export const projectSections: ProjectSection[] = [
+  {
+    id: 'writing',
+    heading: 'Writing',
+    projects: [
+      {
+        kind: 'writing',
+        form: 'post',
+        id: 'agents-want-branches',
+        title: 'Agents Just Want To Have\u2026 Branches',
+        blurb:
+          'Benchmarking how lakehouse platforms handle database branching, and what that means ' +
+          'for agent workflows that branch constantly. Part 1 of a series on the state of OLAP branching.',
+        url: 'https://bauplanlabs.com/post/agents-just-want-to-have-branches',
+        publication: 'Bauplan Labs',
+        date: '2026-06-23',
+        authors: ['Jacopo Tagliabue', 'Giacomo Piccinini', 'Elaine Ang', 'Sam Weldon'],
+      },
+      {
+        kind: 'writing',
+        form: 'paper',
+        id: 'branchbench',
+        title: 'BranchBench: Aligning Database Branching with Agentic Demands',
+        blurb:
+          'A benchmark for branching relational databases under agent workloads. Across five ' +
+          'production systems it finds a hard trade-off: the ones that branch fastest read far ' +
+          'more slowly as branches deepen, and the ones with fast data operations pay heavily ' +
+          'to create and switch branches.',
+        url: 'https://arxiv.org/abs/2604.17180',
+        publication: 'arXiv preprint',
+        date: '2026-04-19',
+        authors: [
+          'Elaine Ang',
+          'Sam Weldon',
+          'In Keun Kim',
+          'Kevin Durand',
+          'Kostis Kaffes',
+          'Eugene Wu',
+        ],
+        identifier: 'arXiv:2604.17180 [cs.DB]',
+      },
+    ],
+  },
   {
     id: 'app-projects',
     heading: 'App Projects',

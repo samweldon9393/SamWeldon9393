@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import Reveal from '../components/Reveal';
 import Section from '../components/Section';
 import ProjectCard from '../components/projects/ProjectCard';
-import { projectSections } from '../data/projects';
+import { isWideProject, projectSections } from '../data/projects';
 import { usePageMeta } from '../hooks/usePageMeta';
 
 export default function Home() {
@@ -17,8 +17,8 @@ export default function Home() {
       <Section
         id="work"
         eyebrow="Selected work"
-        title="Things I have built"
-        description="Web apps, data projects, and a few things that started as coursework and got away from me."
+        title="Things I've built or written"
+        description="Publications, web apps, data projects, and a few things that started as coursework and got away from me."
       >
         <div className="space-y-16">
           {projectSections.map((section) => (
@@ -32,7 +32,7 @@ export default function Home() {
                   <Reveal
                     key={project.id}
                     delay={index * 80}
-                    className={`h-full ${project.kind === 'chart' ? 'sm:col-span-2' : ''}`}
+                    className={`h-full ${isWideProject(project) ? 'sm:col-span-2' : ''}`}
                   >
                     <ProjectCard project={project} />
                   </Reveal>

@@ -28,7 +28,7 @@ export default function About() {
                   alt="Sam, standing between two friends"
                 />
                 <p className="mt-3 font-mono text-xs text-muted">
-                  {site.location} &middot; {site.role}
+                  {site.location}
                 </p>
               </div>
             </Reveal>
@@ -44,7 +44,7 @@ export default function About() {
 
                 <p>
                   In May of 2023 I graduated from Housatonic Community College in Bridgeport, CT
-                  before continuing my studies (now full time) at Columbia University. In September,
+                  before continuing my studies (now full time) at Columbia University. In 2024,
                   my cat{' '}
                   <span
                     className="relative inline-block"

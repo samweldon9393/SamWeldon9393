@@ -27,7 +27,7 @@ There is no unit-test framework. `npm run smoke` ([scripts/smoke.mjs](scripts/sm
 
 The pages are thin. Everything you would normally want to edit is a typed array in [src/data/](src/data/):
 
-- [projects.ts](src/data/projects.ts) — the whole Work section. `Project` is a discriminated union on `kind` (`embed` | `video` | `video-series` | `chart`) over a shared `ProjectBase` of `id` / `title` / `blurb`; [ProjectCard.tsx](src/components/projects/ProjectCard.tsx) switches on it. **Adding a project is a data edit.** Adding a new *kind* of card means adding a union variant plus a case — TypeScript will point at the switch if you forget.
+- [projects.ts](src/data/projects.ts) — the whole Work section. `Project` is a discriminated union on `kind` (`embed` | `video` | `video-series` | `chart` | `writing`) over a shared `ProjectBase` of `id` / `title` / `blurb`; [ProjectCard.tsx](src/components/projects/ProjectCard.tsx) switches on it. **Adding a project is a data edit.** Adding a new *kind* of card means adding a union variant plus a case — TypeScript will point at the switch if you forget. `isWideProject()` in the same file decides which kinds span the full grid width instead of one column.
 - [photos.ts](src/data/photos.ts) — gallery tiles, images and videos.
 - [site.ts](src/data/site.ts) — nav items, social links, tagline, resume URL.
 - [coaches.ts](src/data/coaches.ts) — the ~36 rows behind the D3 chart, inlined deliberately so the graph needs no fetch.
