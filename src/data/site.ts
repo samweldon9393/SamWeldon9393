@@ -1,10 +1,10 @@
 export const site = {
   name: 'Sam Weldon',
-  role: 'Information Science & Artificial Intelligence',
+  role: 'Information Science',
   location: 'New York, NY',
-  tagline: 'I build things for the web, and dig into data to see what it says.',
+  tagline: 'I like to write code and work with big data systems.',
   intro:
-    'Senior at Columbia University studying Information Science and Artificial Intelligence.',
+    'Senior at Columbia University studying Information Science.',
   email: 'sam@sam-weldon.com',
   resumeUrl: '/Resume.pdf',
 };
