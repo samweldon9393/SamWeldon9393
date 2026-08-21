@@ -1,7 +1,7 @@
 export const site = {
   name: 'Sam Weldon',
   tagline:
-    'Sam is a senior at Columbia University studying Information Science and Artificial Intelligence.',
+    'Sam is a senior at Columbia University studying Information Science.',
   resumeUrl: '/Resume.pdf',
 };
 
