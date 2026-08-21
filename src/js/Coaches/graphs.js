@@ -1,8 +1,8 @@
-/* 
- * Turned small SQL database into a JSON file and just put the plain text 
+/*
+ * Turned small SQL database into a JSON file and just put the plain text
  * in here since it's pretty small and this is easiest.
- */ 
-coaches = [
+ */
+const coaches = [
     {
         "coach": "Adrian Griffin",
         "mood": "Negative",
@@ -255,15 +255,15 @@ coaches = [
         "positive_count": 96,
         "negative_count": 218
     }
-]
+];
 
 
 /*
- * This is mostly straight from the d3 documentation, just made the necesary
+ * This is mostly straight from the d3 documentation, just made the necessary
  * changes for sizing and to work with my data. The positives are laid
- * over the negatives since in almost all cases there were nore negatives.
+ * over the negatives since in almost all cases there were more negatives.
  */
-function chart()  {
+function chart() {
     // Declare the chart dimensions and margins.
     const width = 400;
     const height = 450;
@@ -284,155 +284,147 @@ function chart()  {
         .range([height - marginBottom, marginTop]);
 
     // Create the SVG container.
-    const svg = d3.select("svg");
+    const svg = d3.select('#graph svg');
 
     // Add a rect for each negative bar.
-    svg.append("g")
-        .attr("fill", "#DE608F")
+    svg.append('g')
+        .attr('fill', '#DE608F')
         .selectAll()
         .data(coaches)
-        .join("rect")
-        .attr("x", (d) => x(d.coach))
-        .attr("y", (d) => y(d.negative_count))
-        .attr("height", (d) => y(1) - y(d.negative_count))
+        .join('rect')
+        .attr('x', (d) => x(d.coach))
+        .attr('y', (d) => y(d.negative_count))
+        .attr('height', (d) => y(1) - y(d.negative_count))
         .classed('graph-bar', true)
-        .attr("width", x.bandwidth());
-    // Add a rect for each positve bar.
-    svg.append("g")
-        .attr("fill", "#5382B0")
+        .attr('width', x.bandwidth());
+
+    // Add a rect for each positive bar.
+    svg.append('g')
+        .attr('fill', '#5382B0')
         .selectAll()
         .data(coaches)
-        .join("rect")
-        .attr("x", (d) => x(d.coach))
-        .attr("y", (d) => y(d.positive_count))
-        .attr("height", (d) => y(1) - y(d.positive_count))
+        .join('rect')
+        .attr('x', (d) => x(d.coach))
+        .attr('y', (d) => y(d.positive_count))
+        .attr('height', (d) => y(1) - y(d.positive_count))
         .classed('graph-bar', true)
-        .attr("width", x.bandwidth());
+        .attr('width', x.bandwidth());
 
-
-    // Add the x-axis and label.
-    svg.append("g")
-        .attr("transform", `translate(0,${height - marginBottom})`)
-        .call(g => g.select(".domain").remove())
-        .call(g => g.append("text")
-            .attr("x", +200)
-            .attr("y", 18)
-            .attr("fill", "currentColor")
-            .attr("text-anchor", "middle")
-            .classed("text-lg", true)
-            .classed("font-SCPro", true)
-            .text("Coach"));
+    // Add the x-axis label. There are no ticks: the coach names are far too
+    // long to fit, so hovering a bar names the coach instead.
+    svg.append('g')
+        .attr('transform', `translate(0,${height - marginBottom})`)
+        .call((g) => g.select('.domain').remove())
+        .call((g) => g.append('text')
+            .attr('x', 200)
+            .attr('y', 18)
+            .attr('fill', 'currentColor')
+            .attr('text-anchor', 'middle')
+            .classed('text-lg', true)
+            .classed('font-SCPro', true)
+            .text('Coach'));
 
     // Add the y-axis and label, and remove the domain line.
-    svg.append("g")
-        .attr("transform", `translate(${marginLeft},0)`)
-        .call(d3.axisLeft(y).tickFormat((y) => (y * 1).toFixed()))
-        .call(g => g.select(".domain").remove())
-        .call(g => g.append("text")
-            .attr("x", +5 -marginLeft)
-            .attr("y", 20)
-            .attr("fill", "currentColor")
-            .classed("mt-4", true)
-            .classed("text-lg", true)
-            .classed("font-SCPro", true)
-            .attr("text-anchor", "start")
-            .text("Comments"));
+    svg.append('g')
+        .attr('transform', `translate(${marginLeft},0)`)
+        .call(d3.axisLeft(y).tickFormat((v) => (v * 1).toFixed()))
+        .call((g) => g.select('.domain').remove())
+        .call((g) => g.append('text')
+            .attr('x', 5 - marginLeft)
+            .attr('y', 20)
+            .attr('fill', 'currentColor')
+            .classed('mt-4', true)
+            .classed('text-lg', true)
+            .classed('font-SCPro', true)
+            .attr('text-anchor', 'start')
+            .text('Comments'));
 
-    // mouseover and hover to work on mobile and desktop
-    d3.selectAll("rect")
-        .on('mouseover', function(e, d) {
-            d3.select(this)
-                .classed('hovered', true);
-            d3.select('h4')
-                .text(`${d.coach}: +${d.positive_count} / -${d.negative_count}`)
+    // Naming the coach in the card title works for hover on desktop and tap on
+    // mobile, where there is no hover.
+    const title = document.querySelector('#coach-graphs h4');
+
+    d3.selectAll('#graph rect')
+        .on('mouseover click', function (event, d) {
+            d3.select(this).classed('hovered', true);
+            title.textContent = `${d.coach}: +${d.positive_count} / -${d.negative_count}`;
         })
-        .on('mouseout', function(e, d) {
-            d3.select(this)
-                .classed('hovered', true);
-            d3.select('h4')
-                .text('Reddit Hates Coaches');
+        .on('mouseout', function () {
+            d3.select(this).classed('hovered', false);
+            title.textContent = 'Reddit Hates Coaches';
         });
-    d3.selectAll("rect")
-        .on('click', function(e, d) {
-            d3.select(this)
-                .classed('hovered', true);
-            d3.select('h4')
-                .text(`${d.coach}: +${d.positive_count} / -${d.negative_count}`)
-        });
-
-
-    // Return the SVG element.
-    return svg.node();
 }
-chart();
 
 
 /*
- * Replaces the project window with this text description.
- * See graph again reloads the page, it maintains position.
+ * Swaps the graph out for a write up about the project, and back again.
  */
-document.addEventListener('DOMContentLoaded', () => {
+function setUpInfoPanel() {
+    const card = document.getElementById('coach-graphs');
+    const infoButton = card.querySelector('.more-info');
+    const graph = document.getElementById('graph');
+    let panel = null;
 
-    //attach event listeners to the initial buttons
-    const info = document.querySelector('.more-info');
-    const svg = document.querySelector('svg');
-    const div = document.getElementById('coach-graphs');
-    info.addEventListener('click', (event) => {
-        div.innerHTML = '';
+    const description =
+        'Sentiment analysis of Reddit comments about NBA head coaches. ' +
+        'The graph displays negative comments in red and positive comments in blue, ' +
+        'it is sorted by ratio, so for example, the two leftmost coaches are the only ones to ' +
+        'receive more positive than negative comments. The difference in bar sizes demonstrates ' +
+        'a limitation of the data, but it also provides interesting insights into the impact of ' +
+        'market size and tenure on coach popularity. ' +
+        'Hover over a bar on the graph to see which coach is being represented. ' +
+        'Approximately 100,000 comments were scraped and analyzed for this project. ' +
+        'Analysis used a pre-trained model, and the data collection was a bit crude ' +
+        'due to technical/time limitations, but the results do track very closely to ' +
+        'expected values based on anecdotal knowledge of public sentiment surrounding subjects. ' +
+        'See the code and findings write up on:';
 
-        const header = document.createElement('h3');
-        header.textContent = 'Reddit Hates Coaches';
-        header.classList.add('text-center');
-        header.classList.add('mt-2');
-        
-        const expl = document.createElement('p');
-        expl.classList.add('text-center');
-        expl.classList.add('text-sm');
-        expl.classList.add('mx-4');
-        expl.classList.add('mt-12');
-        expl.classList.add('mb-6');
-        expl.textContent = 'Sentiment analysis of Reddit comments about NBA head coaches. ' +
-            'The graph displays negative comments in red and positive comments in blue, ' +
-            'it is sorted by ratio, so for example, the two leftmost coaches are the only ones to ' +
-            'recieve more positive than negative comments. The difference in bar sizes demonstrates ' +
-            'a limitation of the data, but it also provides interesting insights into the impact of ' +
-            'market size and tenure on coach popularity. ' +
-            'Hover over a bar on the graph to see which coach is being represented. ' +
-            'Approximately 100,000 comments were scraped and analyzed for this project ' +
-            'Analysis used a pre-trained model, and the data collection was a bit crude ' +
-            'due to technical/time limitations, but the results do track very closely to ' +
-            'expected values based on anecdotal knowledge of public sentiment surrounding subjects. '+
-            '\nSee the code and findings write up on:';
+    function buildPanel() {
+        const wrapper = document.createElement('div');
 
+        const heading = document.createElement('h3');
+        heading.textContent = 'Reddit Hates Coaches';
+        heading.classList.add('text-center', 'mt-2');
+
+        const text = document.createElement('p');
+        text.textContent = description;
+        text.classList.add('text-center', 'text-sm', 'mx-4', 'mt-12', 'mb-6');
 
         const link = document.createElement('a');
-        link.href = "https://github.com/samweldon9393/Reddit-Hates-Coaches";
-        link.classList.add('ml-44');
-        link.classList.add('go-back');
+        link.href = 'https://github.com/samweldon9393/Reddit-Hates-Coaches';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
         link.textContent = 'GitHub';
+        link.classList.add('ml-44');
 
-        const back = document.createElement('h3');
-        back.setAttribute('id', 'go-back');
+        const back = document.createElement('button');
+        back.type = 'button';
         back.textContent = 'See Graph Again';
-        back.classList.add('go-back');
-        back.classList.add('text-center');
-        back.classList.add('hover:cursor-pointer');
-        back.classList.add('mt-1');
-        
-        div.appendChild(header);
-        div.appendChild(expl);
-        div.appendChild(link);
-        div.appendChild(back);
+        back.classList.add('text-center', 'hover:cursor-pointer', 'mt-1');
+        back.addEventListener('click', hidePanel);
+
+        wrapper.append(heading, text, link, back);
+        return wrapper;
+    }
+
+    function showPanel() {
+        if (panel) return;
+        panel = buildPanel();
+        graph.classList.add('hidden');
+        infoButton.classList.add('hidden');
+        card.appendChild(panel);
+    }
+
+    function hidePanel() {
+        if (!panel) return;
+        panel.remove();
+        panel = null;
+        graph.classList.remove('hidden');
+        infoButton.classList.remove('hidden');
+    }
+
+    infoButton.addEventListener('click', showPanel);
+}
 
 
-        back.addEventListener('click', (event) => {
-            location.reload();
-            
-        });
-
-
-    });
-    
-});
-
-
+chart();
+setUpInfoPanel();

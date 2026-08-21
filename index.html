@@ -1,233 +1,190 @@
 <!doctype html>
 <html lang="en">
-  
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="HTML, CSS">
-    <meta name="description" content="Hello!">  
+    <meta name="description" content="Portfolio of Sam Weldon: app, data, and school projects." />
     <title>Sam Weldon</title>
-    <link rel="stylesheet" href="pub/styles.css">
-    <link rel="icon" href="pub/images/s_vector.png" type="image/png">
-    <script type="module" src="./src/js/Poker/test.js"></script> 
+    <link rel="stylesheet" href="pub/styles.css" />
+    <link rel="icon" href="pub/images/s_vector.png" type="image/png" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-                  onload="renderMathInElement(document.body);"></script>
+            onload="renderMathInElement(document.body);"></script>
 
+    <!-- Project cards are a fixed 400x480 box. Tailwind's build output is committed
+         rather than generated, so card-specific rules live here as plain CSS. -->
+    <style>
+      .project-card {
+        position: relative;
+        width: 400px;
+        height: 480px;
+      }
 
- <!-- need to refactor at some point from tailwind to straight CSS -->
-<style>
-    /* Project card container */
-    #iframe-components {
-      width: 400px;
-      height: 480px;
-      overflow: hidden;
-      position: relative;
-    }
+      /* Cards that embed a live site: clip the iframe to the card. */
+      .project-frame {
+        overflow: hidden;
+      }
 
-    /* Title area */
-    #iframe-components h4 {
-      margin: 0;
-      padding: 0.25rem 0;
-      text-align: center;
-      font-size: 0.9rem;
-      line-height: 1.25rem;
-    }
+      .project-frame h4 {
+        margin: 0;
+        padding: 0.25rem 0;
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.25rem;
+      }
 
-    /* Iframe fills remaining space */
-    #iframe-components iframe {
-      display: block;
-      width: 100%;
-      height: calc(100% - 2rem); /* leaves room for the title */
-      border: 0;
-    }
-  </style>
-
-
+      .project-frame iframe {
+        display: block;
+        width: 100%;
+        height: calc(100% - 2rem); /* leaves room for the title */
+        border: 0;
+      }
+    </style>
   </head>
 
-  <body class="text-blue-100 h-screen bg-cover bg-center relative bg-no-repeat bg-deepBlue font-Kanit">
-    <!--style="background-image: url(pub/images/BlueBG.png)")-->
+  <body class="text-blue-100 bg-deepBlue font-Kanit">
 
-    <header role="banner" class="relative flex flex-col items-center justify-between bg-opacity-50 
-                         px-4 pt-8 sm:flex-row md:px-8 sm:py-2 lg:px-10 2xl:py-0 2xl:px12 shadow-inner"> 
+    <header role="banner" class="relative flex flex-col items-center justify-between bg-opacity-50
+                                 px-4 pt-8 sm:flex-row md:px-8 sm:py-2 lg:px-10 2xl:py-0 shadow-inner">
       <a href="./index.html">
-      <h1 class="flex-shrink-0 items-center text-2xl font-serif text-blue-200 hover:rotate-180 
-                 hover:text-white transition-transform duration-500 opacity-90 transition object-fill">
-        \[ \overrightarrow{s}W\]
-      </h1>
+        <h1 class="flex-shrink-0 items-center text-2xl font-serif text-blue-200 hover:rotate-180
+                   hover:text-white transition-transform duration-500 opacity-90">
+          \[ \overrightarrow{s}W\]
+        </h1>
       </a>
-      <nav class="sm:ml-auto sm:pt-0 text-blue-100 pb-10 text-blue-200">
-        <ul class="flex space-x-6 sm:space-x-12 lg:space-x-16 xl:space-x-16 2xl:space-x-20
-           ">
-          <li class="Card">  <a class="Link" href="./about.html">About</a> </li>
-          <li class="Card">  <a class="Link" href="#projects">Projects</a> </li>
-          <li class="Card"> <a class="Link" href="./photos.html">Photos</a> </li>
-          <li class="Card"> <a class="Link" href="#contact">Contact</a> </li>
-          <li class="Card"> <a class="Link" href="pub/Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a> </li>
+      <nav class="sm:ml-auto sm:pt-0 pb-10 text-blue-200">
+        <ul class="flex space-x-6 sm:space-x-12 lg:space-x-16 xl:space-x-16 2xl:space-x-20">
+          <li class="Card"><a class="Link" href="./about.html">About</a></li>
+          <li class="Card"><a class="Link" href="#projects">Projects</a></li>
+          <li class="Card"><a class="Link" href="./photos.html">Photos</a></li>
+          <li class="Card"><a class="Link" href="#contact">Contact</a></li>
+          <li class="Card"><a class="Link" href="pub/Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
         </ul>
       </nav>
     </header>
 
     <main id="main-content" class="mx-auto">
-      <div class="bg-fixed bg-[length:800px_600px] md:bg-auto bg-no-repeat opacity-75" style="background-image: url(pub/images/sky1.png)">
-      <p class="text-deepBlue text-end">_</p>
-      <article class="px-4 mb-8 sm:px-6 lg:px-0">
-        <div class="mx-auto">
-          <div class="max-w-xl mx-auto mt-12 mb-24 2xl:max-w-2xl sm:my-24 lg:my-40 xl:my-48 2xl:my-56">
-            <h1 class="mb-4 text-2xl leading-snug md:mb-6 sm:text-3xl lg:text-3-75xl 2xl:text-4xl font-sans">
-              Sam is a senior at Columbia University studying Information Science.
-            </h1>
-          </div>
-          <div class=" text-blue-100 flex flex-col justify-center items-center pb-24">
+      <div class="bg-fixed bg-[length:800px_600px] md:bg-auto bg-no-repeat opacity-75"
+           style="background-image: url(pub/images/sky1.png)">
 
-            <section id="projects">
+        <!-- Spacer: keeps the first child's top margin from collapsing out of the
+             background container. -->
+        <p class="text-deepBlue text-end" aria-hidden="true">_</p>
 
-              <div class="flex flex-col items-center justify-center">
-                <h2 class="text-2xl mb-6 sm:mb-8 lg:mb-10">App Projects</h2>
-              </div>
+        <article class="px-4 mb-8 sm:px-6 lg:px-0">
+          <div class="mx-auto">
 
-              <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
+            <div class="max-w-xl mx-auto mt-12 mb-24 2xl:max-w-2xl sm:my-24 lg:my-40 xl:my-48 2xl:my-56">
+              <h1 class="mb-4 text-2xl leading-snug md:mb-6 sm:text-3xl 2xl:text-4xl font-sans">
+                Sam is a senior at Columbia University studying Information Science and Artificial Intelligence.
+              </h1>
+            </div>
 
-                <!-- Sing Sing Maps -->
-                <a href="https://samweldon9393.github.io/SingSingPrisonMuseum-maps/" target="_blank" rel="noopener noreferrer">
-                <div id="iframe-components">
-                <div
-                    id="sing-sing-maps"
-                    class="border-dotted shadow-xl hover:scale-105 transition duration-300
-                           w-[400px] h-[480px] my-4 md:my-2 lg:my-0 mx-0 text-blue-100
-                           overflow-hidden relative"
-                  >
-                  <h4 class="text-center mt-1 mb-1">Sing Sing Prison Museum Maps App</h4>
-                  <iframe
-                    src="https://samweldon9393.github.io/SingSingPrisonMuseum-maps/"
-                    loading="lazy"
-                    class="project-preview"
-                    sandbox="allow-scripts allow-same-origin"
-                    class="w-[1200px] h-[800px] scale-[0.33] origin-top-left border-none"
-                  ></iframe>
+            <div id="projects" class="text-blue-100 flex flex-col justify-center items-center pb-24">
+
+              <section aria-labelledby="app-projects">
+                <div class="flex flex-col items-center justify-center">
+                  <h2 id="app-projects" class="text-2xl mb-6 sm:mb-8 lg:mb-10">App Projects</h2>
                 </div>
-                </div> 
-                </a>
 
-                <!-- Safe Works -->
-                <a href="https://samweldon9393.github.io/SafeWorks/" target="_blank" rel="noopener noreferrer">
-                <div id="iframe-components">
-                <div id="safe-works" class="shadow-xl hover:scale-105 transition duration-300
-                                               w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100">
-                  <h4 class="text-center mt-1 mb-1">SafeWorks: Harm Reduction Service Locator</h4>
-                  <iframe
-                    id="safe-works-iframe"
-                    src="https://samweldon9393.github.io/SafeWorks/"
-                    loading="lazy"
-                    class="project-preview"
-                    sandbox="allow-scripts allow-same-origin"
-                    class="w-[1200px] h-[800px] scale-[0.33] origin-top-left border-none"
-                  ></iframe>
+                <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
 
-                </div> 
-                </div> 
-                </a>
-              </div> 
-            </section>
+                  <!-- Sing Sing Maps -->
+                  <a href="https://samweldon9393.github.io/SingSingPrisonMuseum-maps/" target="_blank" rel="noopener noreferrer">
+                    <div id="sing-sing-maps" class="project-card project-frame shadow-xl hover:scale-105
+                                                    transition duration-300 my-4 md:my-2 lg:my-0 text-blue-100">
+                      <h4>Sing Sing Prison Museum Maps App</h4>
+                      <iframe src="https://samweldon9393.github.io/SingSingPrisonMuseum-maps/"
+                              title="Sing Sing Prison Museum Maps App"
+                              loading="lazy"
+                              sandbox="allow-scripts allow-same-origin"></iframe>
+                    </div>
+                  </a>
 
-            <section id="projects">  <!-- Data projects -->
-              <div class="flex flex-col items-center justify-center">
-                <h2 class="text-2xl mb-6 sm:mb-8 lg:mb-10">Data Projects</h2>
-              </div>
-              <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
+                  <!-- Safe Works -->
+                  <a href="https://samweldon9393.github.io/SafeWorks/" target="_blank" rel="noopener noreferrer">
+                    <div id="safe-works" class="project-card project-frame shadow-xl hover:scale-105
+                                                transition duration-300 my-4 md:my-2 lg:my-0 text-blue-100">
+                      <h4>SafeWorks: Harm Reduction Service Locator</h4>
+                      <iframe src="https://samweldon9393.github.io/SafeWorks/"
+                              title="SafeWorks: Harm Reduction Service Locator"
+                              loading="lazy"
+                              sandbox="allow-scripts allow-same-origin"></iframe>
+                    </div>
+                  </a>
 
-                <!-- Coach Graphs -->
-                  <div id="coach-graphs" class="border-dotted shadow-xl hover:scale-105 transition duration-300
-                                               w-400 h-480 my-4 md:my-2 lg:my-0 mx-0 text-blue-100">
-                  <div class="flex flex-row justify-end">
-                    <img class="more-info max-w-20 max-h-20 mb-8 absolute hover:cursor-pointer" src="./pub/images/Info.png" alt="=>" />
-                  </div>
-                  <h4 class="text-center mt-1 mb-1">Reddit Hates Coaches</h4>
-                  <div id="graph" class="flex flex-cols font-SCPro">
-                    <svg width="380" height="450" viewBox="0, 0, 400, 450" class="ml-1 relative">
-                    </svg>
-                  </div>
+                </div>
+              </section>
+
+              <section aria-labelledby="data-projects">
+                <div class="flex flex-col items-center justify-center">
+                  <h2 id="data-projects" class="text-2xl mb-6 sm:mb-8 lg:mb-10">Data Projects</h2>
+                </div>
+
+                <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
+
+                  <!-- Coach Graphs: rendered by src/js/Coaches/graphs.js -->
+                  <div id="coach-graphs" class="project-card shadow-xl hover:scale-105
+                                                transition duration-300 my-4 md:my-2 lg:my-0 text-blue-100">
+                    <div class="flex flex-row justify-end">
+                      <img class="more-info max-w-20 max-h-20 mb-8 absolute hover:cursor-pointer"
+                           src="./pub/images/Info.png" alt="About this project" />
+                    </div>
+                    <h4 class="text-center mt-1 mb-1">Reddit Hates Coaches</h4>
+                    <div id="graph" class="flex font-SCPro">
+                      <svg width="380" height="450" viewBox="0, 0, 400, 450" class="ml-1 relative"></svg>
+                    </div>
                   </div>
 
                   <!-- Sing Sing Animations -->
-                <div id="sing-sing-animations" class="shadow-xl hover:scale-105 transition duration-300
-                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100 bg-black bg-opacity-50">
-                  <h4 class="text-center mt-1 mb-1">Sing Sing Prison Museum Animations</h4>
+                  <div id="sing-sing-animations" class="project-card shadow-xl hover:scale-105
+                                                       transition duration-300 my-4 md:my-2 lg:my-0
+                                                       text-blue-100 bg-black bg-opacity-50">
+                    <h4 class="text-center mt-1 mb-1">Sing Sing Prison Museum Animations</h4>
 
-                  <!-- Video container -->
-                  <div class="relative flex items-center justify-center mt-4">
-                    <!-- Left arrow -->
-                    <button
-                        onclick="prevVideo()"
-                        class="absolute left-2 text-2xl bg-black/50 rounded-full px-2 py-1 hover:bg-white"
-                        aria-label="Previous video"
-                        >
-                        ‹
-                    </button>
-
-                      <video
-                          id="sing-sing-video"
-                          controls
-                          class="group-hover:opacity-100 opacity-90 transition pt-20"
-                          src="./pub/images/Alone.mp4"
-                          ></video>
-
-                      <!-- Right arrow -->
-                      <button
-                          onclick="nextVideo()"
-                          class="absolute right-2 text-2xl bg-black/50 rounded-full px-2 py-1 hover:bg-black"
-                          aria-label="Next video"
-                          >
-                          ›
+                    <div class="relative flex items-center justify-center mt-4">
+                      <button id="prev-video" type="button" aria-label="Previous video"
+                              class="absolute left-2 text-2xl bg-black/50 rounded-full px-2 py-1 hover:bg-white">
+                        &lsaquo;
                       </button>
 
-                </div> 
+                      <video id="sing-sing-video" controls src="./pub/images/Alone.mp4"
+                             class="opacity-90 transition pt-20"></video>
 
-              </div> 
-            </section>
-
-            <section id="projects">  <!-- School projects -->
-
-              <div class="flex flex-col items-center justify-center">
-                <h2 class="text-2xl mb-6 sm:mb-8 lg:mb-10">School Projects</h2>
-              </div>
-              <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
-
-                <div id="mymake" class="shadow-xl hover:scale-105 transition duration-300
-                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100 bg-black bg-opacity-50">
-                  <h4 class="text-center mt-1 mb-1">MyMake: Implement make in C++</h4>
-                  <video controls class="mx-2 mt-8 h-96 w-96 " src="./pub/images/mymake2.mp4" type="video/mp4"></video>
-                </div> 
-
-                <div id="lab7" class="shadow-xl hover:scale-105 transition duration-300
-                         w-400 h-480 my-4 md:my-2 lg:my-0 mx-0  text-blue-100 bg-black bg-opacity-50">
-                  <h4 class="text-center mt-1 mb-1">Webserver: Web Server from scratch in C</h4>
-                  <video controls class="mx-2 mt-8 h-96 w-96 " src="./pub/images/lab7.mp4" type="video/mp4"></video>
-
-                </div> 
-
-              </div> 
-
-                <!--
-                <div id="game-container" class="bg-indigo-900 shadow-xl flex flex-col items-center justify-center rounded-xl
-                                                w-400 h-480 my-2 md:my-0 hover:scale-105 transition duration-300 mx-0">
-                  <h1>Welcome to Video Poker!</h1>
-                  <h2 class="game-mode">Choose Game Mode</h2>
-
-                  <div class="min-h-16">
-                    <button id="normal" class="button"
-                                        type="button">5 Card</button>
-                    <button id="wild" class="button"
-                                      type="button">2s Wild</button>
+                      <button id="next-video" type="button" aria-label="Next video"
+                              class="absolute right-2 text-2xl bg-black/50 rounded-full px-2 py-1 hover:bg-black">
+                        &rsaquo;
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </div>
-                -->
-            </section>
 
+                </div>
+              </section>
+
+              <section aria-labelledby="school-projects">
+                <div class="flex flex-col items-center justify-center">
+                  <h2 id="school-projects" class="text-2xl mb-6 sm:mb-8 lg:mb-10">School Projects</h2>
+                </div>
+
+                <div class="pb-16 min-h-60 flex flex-row flex-wrap justify-center items-center md:space-x-6 lg:space-x-12">
+
+                  <div id="mymake" class="project-card shadow-xl hover:scale-105 transition duration-300
+                                          my-4 md:my-2 lg:my-0 text-blue-100 bg-black bg-opacity-50">
+                    <h4 class="text-center mt-1 mb-1">MyMake: Implement make in C++</h4>
+                    <video controls class="mx-2 mt-8 h-96 w-96" src="./pub/images/mymake2.mp4"></video>
+                  </div>
+
+                  <div id="lab7" class="project-card shadow-xl hover:scale-105 transition duration-300
+                                        my-4 md:my-2 lg:my-0 text-blue-100 bg-black bg-opacity-50">
+                    <h4 class="text-center mt-1 mb-1">Webserver: Web Server from scratch in C</h4>
+                    <video controls class="mx-2 mt-8 h-96 w-96" src="./pub/images/lab7.mp4"></video>
+                  </div>
+
+                </div>
+              </section>
 
               <section id="contact" class="max-w-2xl pb-12 mx-auto sm:pb-24 lg:pb-40">
                 <div class="max-w-2xl mx-auto flex flex-row justify-center">
@@ -235,54 +192,57 @@
                 </div>
                 <div class="flex flex-row items-center space-x-10">
                   <a class="mx-2 flex flex-row items-center justify-center" href="mailto:sam@sam-weldon.com">
-                    <img class="max-h-8 max-w-8 mx-1 hover:rotate-180 transition duration-300" src="pub/images/email.png" alt="Email Logo" />
+                    <img class="max-h-8 max-w-8 mx-1 hover:rotate-180 transition duration-300"
+                         src="pub/images/email.png" alt="" />
                     Email</a>
-                  <a class="mx-1 flex flex-row items-center justify-center" href="https://www.linkedin.com/in/samuel-weldon-a932431b8" target="_blank" rel="noopener noreferrer">
-                    <img class="max-h-10 max-w-10 hover:rotate-180 transition duration-300" src="pub/images/linkedin.png" alt="LinkedIn Logo" />
+                  <a class="mx-1 flex flex-row items-center justify-center"
+                     href="https://www.linkedin.com/in/samuel-weldon-a932431b8" target="_blank" rel="noopener noreferrer">
+                    <img class="max-h-10 max-w-10 hover:rotate-180 transition duration-300"
+                         src="pub/images/linkedin.png" alt="" />
                     Linkedin</a>
-                  <a class="mx-1 flex flex-row items-center justify-center" href="https://github.com/samweldon9393" target="_blank" rel="noopener noreferrer">
-                    <img class="max-h-10 max-w-10 hover:rotate-180 transition duration-300" src="pub/images/gh.png" alt="LinkedIn Logo" />
+                  <a class="mx-1 flex flex-row items-center justify-center"
+                     href="https://github.com/samweldon9393" target="_blank" rel="noopener noreferrer">
+                    <img class="max-h-10 max-w-10 hover:rotate-180 transition duration-300"
+                         src="pub/images/gh.png" alt="" />
                     GitHub</a>
                 </div>
-              </section> 
+              </section>
+
             </div>
-        </div>
-      </article>
+          </div>
+        </article>
       </div>
     </main>
+
     <script src="./src/js/Coaches/graphs.js"></script>
+    <script>
+      // Sing Sing animations card: cycle through the three clips.
+      const videos = [
+        './pub/images/Alone.mp4',
+        './pub/images/Forgiveness.mp4',
+        './pub/images/Love.mp4'
+      ];
+
+      const videoEl = document.getElementById('sing-sing-video');
+      let currentVideoIndex = 0;
+
+      function loadVideo(index) {
+        videoEl.pause();
+        videoEl.src = videos[index];
+        videoEl.load();
+      }
+
+      document.getElementById('next-video').addEventListener('click', () => {
+        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+        loadVideo(currentVideoIndex);
+      });
+
+      document.getElementById('prev-video').addEventListener('click', () => {
+        currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+        loadVideo(currentVideoIndex);
+      });
+    </script>
 
   </body>
-
-<script>
-  const videos = [
-    "./pub/images/Alone.mp4",
-    "./pub/images/Forgiveness.mp4",
-    "./pub/images/Love.mp4"
-  ];
-
-  let currentVideoIndex = 0;
-
-  const videoEl = document.getElementById("sing-sing-video");
-
-  function loadVideo(index) {
-    videoEl.pause();
-    videoEl.src = videos[index];
-    videoEl.load();
-    //videoEl.play();
-  }
-
-  function nextVideo() {
-    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-    loadVideo(currentVideoIndex);
-  }
-
-  function prevVideo() {
-    currentVideoIndex =
-      (currentVideoIndex - 1 + videos.length) % videos.length;
-    loadVideo(currentVideoIndex);
-  }
-</script>
-
 
 </html>
