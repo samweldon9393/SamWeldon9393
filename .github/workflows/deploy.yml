@@ -32,6 +32,8 @@ jobs:
       - name: Typecheck and render every route
         run: npm run check
 
+      # npm run build also runs verify:dist, which checks the Pages invariants
+      # (404 fallback, CNAME, redirect stubs).
       - run: npm run build
 
       - uses: actions/upload-pages-artifact@v3

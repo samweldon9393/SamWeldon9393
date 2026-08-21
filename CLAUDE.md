@@ -21,7 +21,17 @@ npm run preview    # serve the built dist/ locally
 npm run logo       # regenerate the KaTeX site mark (rarely needed)
 ```
 
-There is no unit-test framework. `npm run smoke` ([scripts/smoke.mjs](scripts/smoke.mjs)) is the safety net: it SSRs each route via [scripts/ssr-entry.tsx](scripts/ssr-entry.tsx) and fails if a page throws, a route stops matching, or expected content vanishes. Add a needle there when you add a page. It catches what `tsc` cannot, so run it after component changes.
+There is no unit-test framework. Two scripts stand in:
+
+- `npm run smoke` ([scripts/smoke.mjs](scripts/smoke.mjs)) SSRs each route via [scripts/ssr-entry.tsx](scripts/ssr-entry.tsx) and fails if a page throws, a route stops matching, or expected content vanishes. Add a needle there when you add a page.
+- `npm run verify:dist` ([scripts/verify-dist.mjs](scripts/verify-dist.mjs)) runs as part of `npm run build` and asserts the deploy invariants: `404.html` exists and matches `index.html`, `CNAME` is right, the legacy redirect stubs are intact. Every one of those fails silently in a way you would only notice on the live site.
+
+**Verify build changes from a clean checkout, in CI order.** `npm run check` runs *before* `npm run build`, so a leftover local `dist/` can hide a failure that CI hits immediately:
+
+```bash
+rm -rf /tmp/ci && mkdir /tmp/ci && git ls-files | tar -cf - -T - | (cd /tmp/ci && tar -xf -)
+cd /tmp/ci && npm ci && npm run check && npm run build
+```
 
 ## Content lives in data, not markup
 
@@ -38,7 +48,7 @@ Prefer extending the data and its types over hard-coding markup in a page.
 
 React Router with real paths (`/`, `/about`, `/photos`). Pages has no SPA rewrite, so two things make deep links work, and **both must survive any build change**:
 
-1. [vite.config.ts](vite.config.ts) copies `dist/index.html` to `dist/404.html` after the bundle. Pages serves 404.html for unknown paths, which boots the app and lets the router resolve the URL.
+1. [vite.config.ts](vite.config.ts) copies `dist/index.html` to `dist/404.html` after the bundle. Pages serves 404.html for unknown paths, which boots the app and lets the router resolve the URL. The copy runs in `closeBundle` (Vite writes `index.html` *after* `generateBundle`, so it is not in the bundle to copy) and is skipped for SSR builds — `apply: 'build'` is true for `vite build --ssr` too, which is what `npm run smoke` runs.
 2. `public/about.html` and `public/photos.html` are redirect stubs for the site's pre-React URLs. Don't delete them; old links and search results still point there.
 
 `public/CNAME` carries the custom domain into `dist/` — losing it drops sam-weldon.com back to the github.io address.

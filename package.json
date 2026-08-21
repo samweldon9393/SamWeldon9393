@@ -6,12 +6,13 @@
   "description": "Personal portfolio site for sam-weldon.com",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && npm run verify:dist",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "logo": "node scripts/render-logo.mjs > src/components/logoMarkup.ts",
     "smoke": "vite build --ssr scripts/ssr-entry.tsx --outDir .smoke --logLevel error && node scripts/smoke.mjs",
-    "check": "npm run typecheck && npm run smoke"
+    "check": "npm run typecheck && npm run smoke",
+    "verify:dist": "node scripts/verify-dist.mjs"
   },
   "dependencies": {
     "d3-array": "^3.2.4",
